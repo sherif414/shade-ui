@@ -1,27 +1,52 @@
 <script setup lang="ts">
-withDefaults(
+import { computed, ref } from 'vue'
+
+const props = withDefaults(
   defineProps<{
-    label: string
+    label?: string
     modelValue?: string
+    type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'time' | 'url'
+    placeholder?: string
+    modelModifiers?: { lazy?: boolean }
   }>(),
-  {}
+  {
+    type: 'text',
+    placeholder: ' ',
+    modelModifiers: () => ({}),
+  }
 )
-defineEmits(['update:modelValue'])
+
+const eventType = computed(() => (props.modelModifiers.lazy ? 'change' : 'input'))
+const inputEl = ref<HTMLInputElement | null>(null)
+
+const errorMessage = ref<string>()
+function validate() {
+  errorMessage.value = inputEl.value?.validationMessage
+}
 </script>
 
 <template>
-  <label class="relative">
+  <label class="relative flex flex-col items-start gap-2">
     <input
+      ref="inputEl"
       v-bind="$attrs"
-      placeholder=" "
-      @input="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
-      class="sui-input rounded-4 outline-gray-2 focus:(outline-purple-600 outline-2) py-10PX w-full border-none bg-transparent p-4 outline outline-1 transition-colors"
-      type="text"
+      @blur="validate"
+      @focus="errorMessage = undefined"
+      :placeholder="placeholder"
+      @[eventType]="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
+      class="sui-input rounded-4px outline-gray-2 focus:(outline-dark-600 outline-2) h-10 w-full border-none bg-transparent px-2 outline outline-1 transition-colors placeholder:text-sm"
+      :class="[errorMessage && 'outline-red-400!']"
+      :type="type"
     />
     <span
-      class="sui-input-label text-gray-5 pointer-events-none absolute top-3 left-4 h-max px-1 leading-none transition-all duration-300"
+      v-if="label"
+      class="sui-input-label text-gray pointer-events-none absolute top-3 left-3 h-max px-1 text-sm leading-none transition-all duration-300"
+      :class="[placeholder !== ' ' ? 'sui-input-label-up' : '', errorMessage && 'text-red-400!']"
       >{{ label }}</span
     >
+    <p class="text-xs text-red-400" :class="[!errorMessage && 'opacity-0!']">
+      {{ errorMessage }}
+    </p>
   </label>
 </template>
 
@@ -31,13 +56,14 @@ defineEmits(['update:modelValue'])
 }
 
 .sui-input:focus ~ .sui-input-label {
-  color: rgb(147, 51, 234);
+  color: black;
 }
 
 .sui-input:not(:placeholder-shown) ~ .sui-input-label,
-.sui-input:focus ~ .sui-input-label {
+.sui-input:focus ~ .sui-input-label,
+.sui-input-label-up {
   transform: translateY(-20px);
   background: white;
-  font-size: 12px;
+  font-size: 0.75rem;
 }
 </style>
