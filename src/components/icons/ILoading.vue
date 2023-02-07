@@ -1,5 +1,5 @@
 <template>
-  <div class="loading h-4 w-4 before:animate-spin after:animate-spin"></div>
+  <div class="loading h-4 w-4 before:animate-spin after:animate-spin" />
 </template>
 
 <style scoped>

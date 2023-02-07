@@ -3,7 +3,6 @@ import { computed, ref } from 'vue'
 
 const isEmpty = ref(false)
 const isFocused = ref(false)
-const value = ref('1')
 const isOpen = computed(() => {
   return isFocused.value
 })
@@ -12,7 +11,12 @@ const isOpen = computed(() => {
 <template>
   <div class="relative text-sm">
     <!-- select button -->
-    <div @focus="isFocused = true" :empty="isEmpty" tabindex="0" class="sui-input"></div>
+    <div
+      @focus="isFocused = true"
+      :empty="isEmpty"
+      tabindex="0"
+      class="sui-input"
+    />
 
     <!-- select label -->
     <span class="sui-input-label">
@@ -20,8 +24,15 @@ const isOpen = computed(() => {
     </span>
 
     <!-- select menu -->
-    <div v-if="isOpen" class="top-110% z-1 rounded-4px absolute left-0 flex w-full flex-col gap-2 border bg-white">
-      <div class="hover:(bg-dark-900 text-gray-100) py-2 px-4 transition-colors" v-for="i in 4" :key="i">
+    <div
+      v-if="isOpen"
+      class="top-110% z-1 rounded-4px absolute left-0 flex w-full flex-col gap-2 border bg-white"
+    >
+      <div
+        class="hover:(bg-dark-900 text-gray-100) py-2 px-4 transition-colors"
+        v-for="i in 4"
+        :key="i"
+      >
         option {{ i }}
       </div>
     </div>

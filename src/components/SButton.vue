@@ -2,30 +2,39 @@
 import { computed, useSlots } from 'vue'
 import ILoading from './icons/ILoading.vue'
 
-export interface Props {
-  loading?: boolean
-  type?: 'text' | 'default'
-  size?: 'sm' | 'md' | 'lg'
-  to?: string
-}
-
-const props = withDefaults(defineProps<Props>(), {
-  size: 'md',
-  type: 'default',
-  to: '',
-})
+const props = withDefaults(
+  defineProps<{
+    loading?: boolean
+    type?: 'text' | 'default'
+    size?: 'sm' | 'md' | 'lg'
+    to?: string
+  }>(),
+  {
+    size: 'md',
+    type: 'default',
+    to: '',
+  }
+)
 
 // computed classes
 const slots = useSlots()
 const sizeClasses = computed(() => {
   // icon only
-  if (!slots.default && slots.icon) return 'py-3 px-4 text-sm'
-
-  if (props.size === 'sm') return 'px-6 h-8 text-xs'
-
-  if (props.size === 'md') return 'px-10 h-10 text-sm'
-
-  if (props.size === 'lg') return 'px-12 h-12 text-base'
+  if (!slots.default && slots.icon) {
+    return 'py-3 px-4 text-sm'
+  }
+  // small button
+  else if (props.size === 'sm') {
+    return 'px-6 h-8 text-xs'
+  }
+  // large button
+  else if (props.size === 'lg') {
+    return 'px-12 h-12 text-base'
+  }
+  // default size button
+  else {
+    return 'px-10 h-10 text-sm'
+  }
 })
 
 const variantClasses = computed(() => {
@@ -48,8 +57,8 @@ const href = props.to ? 'href' : ''
   >
     <ILoading class="absolute!" v-if="loading" />
     <div class="fcc gap-2" :class="{ 'opacity-0': loading }">
-      <slot name="icon"></slot>
-      <slot></slot>
+      <slot name="icon" />
+      <slot />
     </div>
   </Component>
 </template>
