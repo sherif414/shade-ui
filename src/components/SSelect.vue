@@ -1,56 +1,79 @@
 <script lang="ts" setup>
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
+import { onClickOutside } from '@vueuse/core'
 
-const isEmpty = ref(false)
-const isFocused = ref(false)
-const isOpen = computed(() => {
-  return isFocused.value
-})
+export type SelectOption = {
+  label: string
+  value: any
+}
+
+defineProps<{
+  options: SelectOption[]
+}>()
+
+const emit = defineEmits(['update:modelValue'])
+
+const isOpen = ref(false)
+const selected = ref()
+const selectMenuRef = ref<HTMLElement | null>(null)
+
+onClickOutside(selectMenuRef, () => (isOpen.value = false))
+
+function handleSelect(option: SelectOption) {
+  selected.value = option
+  emit('update:modelValue', option.value)
+  isOpen.value = false
+}
 </script>
 
 <template>
   <div class="relative text-sm">
     <!-- select button -->
     <div
-      @focus="isFocused = true"
-      :empty="isEmpty"
+      @keyup.enter="isOpen = !isOpen"
+      @click="isOpen = !isOpen"
+      :open="isOpen"
+      ref="triggerButton"
       tabindex="0"
-      class="sui-input"
-    />
+      class="sui-select min-w-100px"
+    >
+      {{ selected?.label || '' }}
+    </div>
 
     <!-- select label -->
-    <span class="sui-input-label">
-      <slot />
-    </span>
+    <span class="sui-select-label"> <slot /> </span>
 
     <!-- select menu -->
-    <div
+    <ul
       v-if="isOpen"
-      class="top-110% z-1 rounded-4px absolute left-0 flex w-full flex-col gap-2 border bg-white"
+      ref="selectMenuRef"
+      class="top-110% z-1 rounded-4px absolute min-w-full w-max left-0 flex w-full flex-col gap-2 border bg-white max-h-175px overflow-y-auto"
     >
-      <div
-        class="hover:(bg-dark-900 text-gray-100) py-2 px-4 transition-colors"
-        v-for="i in 4"
-        :key="i"
+      <li
+        class="hover:(bg-dark-900 text-gray-100) py-2 px-4"
+        @click="handleSelect(option)"
+        v-for="option in options"
+        :key="option.label"
       >
-        option {{ i }}
-      </div>
-    </div>
+        {{ option.label }}
+      </li>
+    </ul>
   </div>
 </template>
 
 <style scoped>
-.sui-input:not(:placeholder-shown) ~ .sui-input-label {
+.sui-select:not(:placeholder-shown) ~ .sui-select-label {
   color: gray;
 }
 
-.sui-input:focus ~ .sui-input-label {
+.sui-select:focus ~ .sui-select-label {
   color: black;
 }
 
-.sui-input:not([empty]) ~ .sui-input-label,
-.sui-input:focus ~ .sui-input-label,
-.sui-input-label-up {
+.sui-select[open='true'] ~ .sui-select-label,
+.sui-select:focus ~ .sui-select-label,
+.sui-select:not(:empty) ~ .sui-select-label,
+.sui-select-label-up {
   transform: translateY(-20px);
   background: white;
   font-size: 0.75rem;

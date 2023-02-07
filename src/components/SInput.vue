@@ -41,16 +41,14 @@ function validate() {
       class="sui-input rounded-4px outline-gray-2 rounded-4px focus:(outline-dark-600 outline-2) h-10 w-full border-none bg-transparent px-2 outline outline-1 transition-colors placeholder:text-sm"
       :class="[errorMessage && 'outline-red-400!']"
       :type="type"
-    >
+    />
     <span
       v-if="label"
       class="sui-input-label text-gray pointer-events-none absolute top-3 left-3 h-max px-1 text-sm leading-none transition-all duration-300"
       :class="[placeholder !== ' ' ? 'sui-input-label-up' : '', errorMessage && 'text-red-400!']"
-    >{{ label }}</span>
-    <p
-      class="text-xs text-red-400"
-      :class="[!errorMessage && 'opacity-0!']"
+      >{{ label }}</span
     >
+    <p class="text-xs text-red-400" :class="[!errorMessage && 'opacity-0!']">
       {{ errorMessage }}
     </p>
   </label>
