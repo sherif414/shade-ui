@@ -8,6 +8,8 @@ export {}
 declare module '@vue/runtime-core' {
   export interface GlobalComponents {
     IconAdd: typeof import('./src/components/icons/IconAdd.vue')['default']
+    IconChecked: typeof import('./src/components/icons/IconChecked.vue')['default']
+    IconUser: typeof import('./src/components/icons/IconUser.vue')['default']
     ILoading: typeof import('./src/components/icons/ILoading.vue')['default']
     SButton: typeof import('./src/components/SButton.vue')['default']
     SInput: typeof import('./src/components/SInput.vue')['default']

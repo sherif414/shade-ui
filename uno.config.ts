@@ -5,19 +5,12 @@ import transformerDirectives from '@unocss/transformer-directives'
 export default defineConfig({
   shortcuts: {
     fcc: 'flex items-center justify-center',
+    column: 'flex flex-col items-center',
+    row: 'flex flex-row items-center',
+    'floating-label': 'scale-90 text-gray-900 translate-y--160% translate-x--16px',
     // form elements
 
     // form-input
-    'sui-input':
-      'rounded-4px outline-gray-2 focus:(outline-dark-600 outline-2) h-10 w-full border-none bg-transparent px-2 outline outline-1 transition-colors placeholder:text-sm',
-    'sui-input-label':
-      'text-gray pointer-events-none absolute top-3 left-3 h-max px-1 text-sm leading-none transition-all duration-300',
-
-    // form-select
-    'sui-select':
-      'rounded-4px outline-gray-2 focus-visible:(outline-dark-600 outline-2) [&[open="true"]]:(outline-dark-600 outline-2) h-10 w-full border-none bg-transparent px-4 outline outline-1 transition-colors flex justify-start items-center',
-    'sui-select-label':
-      'text-gray pointer-events-none absolute top-3 left-3 h-max px-1 text-sm leading-none transition-all duration-300',
 
     // toast
     'sui-toast-layout': 'fixed left-50% top-70px -translate-x-50% fcc flex-col gap-16px z-9999 pointer-events-none',
