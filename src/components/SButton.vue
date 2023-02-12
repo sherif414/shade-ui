@@ -24,7 +24,7 @@ const sizeClasses = computed<string>(() => {
 
   if (props.size === 'lg') return 'px-12 h-12 text-base'
 
-  return 'px-10 h-40px text-sm'
+  return 'px-10 h-10 text-sm'
 })
 
 const variantClasses = computed(() => {
