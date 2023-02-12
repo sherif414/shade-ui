@@ -1,7 +1,7 @@
 // @unocss-include
 import { animate, timeline } from 'motion'
 
-export function useToast(type: 'success' | 'warn' | 'error' | 'info' | 'notification', content: string, timeOut = 1) {
+export function useToast(type: 'success' | 'warn' | 'error' | 'info' | 'notification', content: string, timeOut = 5) {
   let toastEl = document.getElementById('sui-toast-el')
   if (!toastEl) {
     toastEl = document.createElement('div')
