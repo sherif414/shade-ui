@@ -1,28 +1,14 @@
 <script setup lang="ts">
-const options = [
-  {
-    label: 'option 1',
-    value: '1',
-    checked: false,
-  },
-  {
-    label: 'option 2',
-    value: '2',
-    checked: false,
-  },
-  {
-    label: 'option 3',
-    value: '3',
-    checked: false,
-  },
-  {
-    label: 'option 4',
-    value: '4',
-    checked: false,
-  },
-]
+const options = []
 
-const v = ref<string[]>([])
+for (let i = 0; i < 1000; i++) {
+  options.push({
+    label: 'option ' + i,
+    value: `${i}`,
+  })
+}
+
+const v = ref()
 const loading = ref(false)
 </script>
 
@@ -31,7 +17,7 @@ const loading = ref(false)
     <form @submit.prevent="" class="flex flex-col rounded-3 p-4 pt-6 gap-8 max-w-300px">
       {{ v }}
       <SInput label="username" />
-      <SSelect multiple v-model="v" :options="options" label="select" />
+      <SSelect v-model="v" :options="options" label="select" />
       <div class="row gap-2">
         <SInput type="number" min="1" max="12" label="day" />
         -<SInput type="number" min="1" max="12" label="month" />-
