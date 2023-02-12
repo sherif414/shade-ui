@@ -7,14 +7,14 @@ export default defineConfig({
     fcc: 'flex items-center justify-center',
     column: 'flex flex-col items-center',
     row: 'flex flex-row items-center',
-    'floating-label': 'scale-90 text-gray-900 translate-y--160% translate-x--16px',
+    'floating-label': 'scale-90 text-gray-900 translate-y--160% translate-x--4',
     // form elements
 
     // form-input
 
     // toast
-    'sui-toast-layout': 'fixed left-50% top-70px -translate-x-50% fcc flex-col gap-16px z-9999 pointer-events-none',
-    'sui-toast': ' text-sm fcc gap-2 px-4 h-36px rounded-4px transition-all -translate-y-10px opacity-0',
+    'sui-toast-layout': 'fixed left-50% top-70px -translate-x-50% fcc flex-col gap-4 z-9999 pointer-events-none',
+    'sui-toast': ' text-sm fcc gap-2 px-4 h-9 rounded-4px transition-all -translate-y-2.5 opacity-0',
     'sui-toast-content': 'max-w-500px truncate',
     'toast-warn': 'bg-yellow bg-opacity-10 text-yellow shadow',
     'toast-success': 'bg-green bg-opacity-10 text-green shadow',

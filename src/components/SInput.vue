@@ -1,73 +1,62 @@
 <script setup lang="ts">
-import { computed, ref } from 'vue'
-
 const props = withDefaults(
   defineProps<{
     label?: string
     modelValue?: string
     type?: 'text' | 'email' | 'password' | 'number' | 'tel' | 'time' | 'url'
-    placeholder?: string
     modelModifiers?: { lazy?: boolean }
+    class?: string
+    error?: boolean
+    errorMessage?: string
   }>(),
   {
     type: 'text',
     label: undefined,
     modelValue: undefined,
-    placeholder: ' ',
     modelModifiers: () => ({}),
+    class: '',
+    errorMessage: undefined,
   }
 )
 
 defineEmits(['update:modelValue'])
-
+const fallthroughClasses = computed(() => props.class)
 const eventType = computed(() => (props.modelModifiers.lazy ? 'change' : 'input'))
-const inputEl = ref<HTMLInputElement | null>(null)
-
-const errorMessage = ref<string>()
-function validate() {
-  errorMessage.value = inputEl.value?.validationMessage
-}
 </script>
 
 <template>
-  <label class="relative flex flex-col items-start gap-2">
+  <label :class="[fallthroughClasses]" class="flex items-center relative h-10">
+    <div v-if="$slots.icon" class="absolute w-10 h-full fcc">
+      <slot name="icon"></slot>
+    </div>
     <input
       ref="inputEl"
       v-bind="$attrs"
-      @blur="validate"
-      @focus="errorMessage = undefined"
-      :placeholder="placeholder"
+      placeholder=" "
       @[eventType]="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
-      class="sui-input rounded-4px outline-gray-2 rounded-4px focus:(outline-dark-600 outline-2) h-10 w-full border-none bg-transparent px-2 outline outline-1 transition-colors placeholder:text-sm"
-      :class="[errorMessage && 'outline-red-400!']"
+      class="grow bg-transparent border-none outline peer rounded-1 h-full w-full outline-gray-2 outline-1 px-4 transition-colors placeholder:text-sm focus:(outline-dark-600 outline-2)"
+      :class="[{ 'outline-red-400!': error, 'pl-10': $slots.icon }]"
       :type="type"
     />
     <span
       v-if="label"
-      class="sui-input-label text-gray pointer-events-none absolute top-3 left-3 h-max px-1 text-sm leading-none transition-all duration-300"
-      :class="[placeholder !== ' ' ? 'sui-input-label-up' : '', errorMessage && 'text-red-400!']"
+      class="w-max text-gray text-sm transition duration-300 pointer-events-none absolute"
+      :class="[
+        error && 'text-red-400!',
+        $slots.icon
+          ? 'peer-not-placeholder-shown:floating-label peer-focus:floating-label left-10'
+          : 'peer-not-placeholder-shown:(floating-label translate-x--4) peer-focus:(floating-label translate-x--4) left-4',
+      ]"
       >{{ label }}</span
     >
-    <p class="text-xs text-red-400" :class="[!errorMessage && 'opacity-0!']">
-      {{ errorMessage }}
-    </p>
   </label>
+  <p v-if="error" class="text-xs text-red-400">
+    {{ props.errorMessage }}
+  </p>
 </template>
 
-<style>
-.sui-input:not(:placeholder-shown) ~ .sui-input-label {
-  color: gray;
+<script lang="ts">
+export default {
+  inheritAttrs: false,
 }
-
-.sui-input:focus ~ .sui-input-label {
-  color: black;
-}
-
-.sui-input:not(:placeholder-shown) ~ .sui-input-label,
-.sui-input:focus ~ .sui-input-label,
-.sui-input-label-up {
-  transform: translateY(-20px);
-  background: white;
-  font-size: 0.75rem;
-}
-</style>
+</script>
