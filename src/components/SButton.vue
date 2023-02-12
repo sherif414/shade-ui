@@ -41,11 +41,11 @@ const variantClasses = computed(() => {
 <template>
   <button
     :type="type"
-    class="border-none cursor-pointer font-medium outline outline-transparent rounded-4px leading-none outline-2 outline-offset-2 transition fcc whitespace-nowrap capitalize active:scale-95 focus-visible:outline-dark-800 disabled:(cursor-not-allowed text-gray-400)"
+    class="border-none cursor-pointer font-medium outline outline-transparent rounded-4px leading-none outline-2 outline-offset-2 transition center whitespace-nowrap capitalize active:scale-95 focus-visible:outline-dark-800 disabled:(cursor-not-allowed text-gray-400)"
     :class="[variantClasses, sizeClasses]"
   >
     <ILoading class="absolute!" v-if="loading" />
-    <div class="gap-2 fcc" :class="{ 'opacity-0': loading }">
+    <div class="gap-2 center" :class="{ 'opacity-0': loading }">
       <slot name="icon" />
       <slot />
     </div>
