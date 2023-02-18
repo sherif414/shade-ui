@@ -1,4 +1,6 @@
 <script setup lang="ts">
+import { useAttrs, useSlots, computed } from 'vue'
+
 export interface Props {
   label?: string
   modelValue?: string
@@ -14,7 +16,7 @@ export interface Props {
 
 // 👉 props, attrs, slots
 
-const props = withDefaults(defineProps<Props>(), {
+const p = withDefaults(defineProps<Props>(), {
   type: 'text',
 })
 const { class: _, ...fallThroughAttrs } = useAttrs()
@@ -32,15 +34,15 @@ const labelClasses = computed(() => {
 
 // 👉 input attributes
 // ❕ vue doesn't provide .lazy modifier for custom component v-model
-const eventType = computed(() => (props.modelModifiers?.lazy ? 'change' : 'input'))
-const inputId = `${props.label}-${Math.round(Math.random() * 1000)}`
+const eventType = computed(() => (p.modelModifiers?.lazy ? 'change' : 'input'))
+const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
 </script>
 
 <template>
-  <div :class="[props.error && 'text-red-400!', props.class, 'column items-start gap-1']">
-    <div class="h-10 relative w-full row justify-start">
+  <div :class="[p.error && 'text-red-400!', p.class, 'column items-start gap-1']">
+    <div class="sui-input-wrapper">
       <!-- 👉 appended icon -->
-      <div v-if="$slots.icon" class="absolute w-10 h-full center left-0">
+      <div v-if="$slots.icon" class="sui-input-icon">
         <slot name="icon"></slot>
       </div>
 
@@ -50,21 +52,21 @@ const inputId = `${props.label}-${Math.round(Math.random() * 1000)}`
         v-bind="fallThroughAttrs"
         placeholder=" "
         @[eventType]="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
-        :class="[{ 'outline-red-400!': props.error, 'pl-10': $slots.icon }, 's-input peer']"
+        :class="[{ 'outline-red-400!': p.error, 'pl-10': $slots.icon }, 'sui-input peer']"
         :id="inputId"
-        :type="type"
-        :disabled="disabled"
-        :readonly="readonly"
-        :value="modelValue"
+        :type="p.type"
+        :disabled="p.disabled"
+        :readonly="p.readonly"
+        :value="p.modelValue"
       />
 
       <!-- 👉 label -->
-      <label :for="inputId" v-if="props.label" class="s-input-label" :class="[labelClasses]">{{ props.label }}</label>
+      <label :for="inputId" v-if="p.label" class="sui-input-label" :class="[labelClasses]">{{ p.label }}</label>
     </div>
 
     <!-- 👉 hint & error -->
-    <small v-if="props.error || props.hint" :class="[!props.error && 'text-gray-400', 'text-xs']">
-      {{ props.error ? props.errorMessage || props.hint : props.hint }}
+    <small v-if="p.error || p.hint" :class="[!p.error && 'text-gray-400', 'text-xs']">
+      {{ p.error ? p.errorMessage || p.hint : p.hint }}
     </small>
   </div>
 </template>

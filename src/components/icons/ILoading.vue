@@ -5,6 +5,8 @@
 <style scoped>
 .loading {
   position: relative;
+  display: grid;
+  place-items: center;
 }
 
 .loading::before,
@@ -13,10 +15,9 @@
   width: 100%;
   height: 100%;
   position: absolute;
-  left: 0;
-  right: 0;
   border-color: transparent;
   border-top-color: currentColor;
+  border-style: solid;
   border-radius: 100%;
   border-width: 2px;
 }

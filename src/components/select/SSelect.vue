@@ -1,28 +1,32 @@
 <script lang="ts" setup>
 import { onClickOutside } from '@vueuse/core'
+import { computed, ref } from 'vue'
+import IconArrowDown from '../icons/IconArrowDown.vue'
 
-export type SelectOption = {
+export type Option = {
   label: string
   value: string
 }
 
-const props = defineProps<{
-  options: SelectOption[]
+export interface Props {
+  options: Option[]
   modelValue?: string
   label?: string
-}>()
+}
+
+const p = defineProps<Props>()
 
 const emit = defineEmits<{
   (e: 'update:modelValue', value: string | undefined): void
 }>()
 
-const selectedOption = computed(() => {
-  return props.options.find((i) => i.value === props.modelValue)
+const selectedOption = computed<Option | undefined>(() => {
+  return p.options.find((i) => i.value === p.modelValue)
 })
-const isOpen = ref(false)
+const isOpen = ref<boolean>(false)
 
 // selection
-function handleSelect(option: SelectOption): void {
+function handleSelect(option: Option): void {
   emit('update:modelValue', option.value)
   isOpen.value = false
 }
@@ -47,12 +51,12 @@ onClickOutside(selectRef, () => (isOpen.value = false))
       <!-- select label -->
       <span
         :class="{
-          'floating-label': modelValue || isOpen,
+          'floating-label': p.modelValue || isOpen,
           'text-gray-400': !isOpen,
         }"
         class="transition duration-300 left-4 pointer-events-none absolute"
       >
-        {{ label }}
+        {{ p.label }}
       </span>
     </div>
 
@@ -62,7 +66,7 @@ onClickOutside(selectRef, () => (isOpen.value = false))
       class="bg-white border flex flex-col min-w-full rounded-1 w-max w-full max-h-48 top-110% left-0 z-1 absolute overflow-y-auto"
     >
       <li
-        v-for="option in options"
+        v-for="option in p.options"
         :key="option.label"
         class="py-2 px-4 hover:bg-light-600"
         @click="handleSelect(option)"
@@ -72,3 +76,12 @@ onClickOutside(selectRef, () => (isOpen.value = false))
     </ul>
   </div>
 </template>
+
+<style scoped>
+.sui-select-container {
+  position: relative;
+  font-size: var(--s-font-size-sm);
+}
+.sui-select {
+}
+</style>

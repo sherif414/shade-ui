@@ -1,6 +1,4 @@
-import { defineConfig } from 'unocss'
-import transformerVariantGroup from '@unocss/transformer-variant-group'
-import transformerDirectives from '@unocss/transformer-directives'
+import { defineConfig, transformerDirectives, transformerVariantGroup } from 'unocss'
 
 export default defineConfig({
   shortcuts: [
@@ -9,14 +7,26 @@ export default defineConfig({
       center: 'flex items-center justify-center',
       column: 'flex flex-col items-center',
       row: 'flex flex-row items-center',
-      'floating-label': 'scale-80 text-gray-900 translate-y--160% translate-x--4',
+      'floating-label': 'scale-85 text-gray-900 translate-y--160% translate-x--4',
+    },
+    // button
+    {
+      'sui-button':
+        'center gap-2 border-none cursor-pointer font-medium outline outline-transparent rounded-4px leading-none outline-2 outline-offset-2 transition whitespace-nowrap capitalize active:enabled:scale-95 focus-visible:outline-dark-800 disabled:(cursor-not-allowed text-gray-400)',
+      'sui-button-v-filled': 'hover:bg-dark-400 disabled:bg-gray-200! bg-dark-900 text-gray-100',
+      'sui-button-v-text': 'hover:bg-light-600 active:bg-light-900 bg-transparent',
+      'sui-button-size-sm': 'px-6 h-8 text-xs',
+      'sui-button-size-md': 'px-10 h-10 text-sm',
+      'sui-button-size-lg': 'px-12 h-12 text-base',
+      'sui-button-icon-only': 'h-10 px-3 text-sm',
     },
     // input-input
     {
-      's-input':
+      'sui-input-wrapper': 'h-10 relative w-full row justify-start',
+      'sui-input':
         'grow bg-transparent border-none outline rounded-1 h-10 w-full outline-gray-200 outline-1 read-only:(pointer-events-none outline-transparent bg-light-400) disabled:(cursor-not-allowed outline-transparent bg-light-900) px-4 transition-colors placeholder:text-sm focus:(outline-dark-600 outline-2) read-only:focus:(outline-gray-200 outline-1 cursor-default)',
-      's-input-label': 'w-max text-gray-400 text-sm transition duration-300 pointer-events-none absolute',
-      's-input-wrapper': '',
+      'sui-input-icon': 'absolute w-10 h-full center left-0',
+      'sui-input-label': 'w-max text-gray-400 text-sm transition duration-300 pointer-events-none absolute',
     },
     {
       // toast
