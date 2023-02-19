@@ -1,6 +1,6 @@
 <script setup lang="ts">
 import ILoading from '@/components/icons/ILoading.vue'
-import { useSlots, computed } from 'vue'
+import { computed } from 'vue'
 
 export interface Props {
   loading?: boolean
@@ -8,14 +8,13 @@ export interface Props {
   variant?: 'text' | 'default'
   size?: 'sm' | 'md' | 'lg'
   type?: 'submit' | 'button'
+  iconOnly?: boolean
 }
 
 const p = withDefaults(defineProps<Props>(), {
   size: 'md',
   variant: 'default',
   type: 'button',
-  loading: false,
-  disabled: false,
 })
 
 const emit = defineEmits<{
@@ -23,9 +22,8 @@ const emit = defineEmits<{
 }>()
 
 // !SECTION styles
-const slots = useSlots()
 const sizeClasses = computed<string>(() => {
-  if (!slots.default && (slots.iconPrepend || slots.iconAppend)) return 'sui-button-icon-only'
+  if (p.iconOnly) return 'sui-button-icon-only'
 
   if (p.size === 'sm') return 'sui-button-size-sm'
 
@@ -62,9 +60,7 @@ function handleClick(e: Event) {
   >
     <ILoading class="absolute!" v-if="p.loading" />
     <div :class="p.loading && 'opacity-0'">
-      <slot name="iconPrepend" />
       <slot />
-      <slot name="iconAppend" />
     </div>
   </button>
 </template>

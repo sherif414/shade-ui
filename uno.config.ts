@@ -12,9 +12,9 @@ export default defineConfig({
     // button
     {
       'sui-button':
-        'center gap-2 border-none cursor-pointer font-medium outline outline-transparent rounded-4px leading-none outline-2 outline-offset-2 transition whitespace-nowrap capitalize active:enabled:scale-95 focus-visible:outline-dark-800 disabled:(cursor-not-allowed text-gray-400)',
+        'center gap-2 border-none cursor-pointer font-medium outline outline-transparent rounded-4px leading-none outline-2 outline-offset-2 transition whitespace-nowrap capitalize enabled-active:scale-95 focus-visible:outline-dark-800 disabled:(cursor-not-allowed text-gray-400)',
       'sui-button-v-filled': 'hover:bg-dark-400 disabled:bg-gray-200! bg-dark-900 text-gray-100',
-      'sui-button-v-text': 'hover:bg-light-600 active:bg-light-900 bg-transparent',
+      'sui-button-v-text': 'hover:bg-light-600 enabled-active:bg-light-900 bg-transparent',
       'sui-button-size-sm': 'px-6 h-8 text-xs',
       'sui-button-size-md': 'px-10 h-10 text-sm',
       'sui-button-size-lg': 'px-12 h-12 text-base',
