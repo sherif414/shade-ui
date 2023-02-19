@@ -24,9 +24,11 @@ function hanldeClick(e: Event) {
 
 <template>
   <main class="grid gap-4 place-items-center bg-light-1 min-h-screen font-sans">
-    <form @submit.prevent="" class="gap-4 rounded-3 p-4 pt-6 gap-8 w-300px">
+    <form @submit.prevent="" class="gap-4 rounded-3 p-4 pt-6 gap-8 w-300px center">
       <!-- <Select v-model="v" :options="options" label="select" /> -->
-      <Button class="mb-4" :disabled="bool" variant="default" @click="hanldeClick">submit</Button>
+      <Button size="sm" :disabled="bool" @click="hanldeClick">submit</Button>
+      <Button size="md" :disabled="bool" @click="hanldeClick">submit</Button>
+      <Button size="lg" :disabled="bool" @click="hanldeClick">submit</Button>
       <Button icon-only @click="bool = !bool"><IconUser /></Button>
     </form>
   </main>

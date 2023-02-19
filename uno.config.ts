@@ -1,3 +1,4 @@
+// @unocss-include
 import { defineConfig, transformerDirectives, transformerVariantGroup } from 'unocss'
 
 export default defineConfig({
@@ -16,8 +17,8 @@ export default defineConfig({
       'sui-button-v-filled': 'hover:bg-dark-400 disabled:bg-gray-200! bg-dark-900 text-gray-100',
       'sui-button-v-text': 'hover:bg-light-600 enabled-active:bg-light-900 bg-transparent',
       'sui-button-size-sm': 'px-6 h-8 text-xs',
-      'sui-button-size-md': 'px-10 h-10 text-sm',
-      'sui-button-size-lg': 'px-12 h-12 text-base',
+      'sui-button-size-md': 'px-8 h-10 text-sm',
+      'sui-button-size-lg': 'px-10 h-12 text-base',
       'sui-button-icon-only': 'h-10 px-3 text-sm',
     },
     // input-input
