@@ -28,6 +28,18 @@ export default defineConfig({
       'sui-input-icon': 'absolute w-10 h-full center left-0',
       'sui-input-label': 'w-max text-gray-400 text-sm transition duration-300 pointer-events-none absolute',
     },
+    // select
+    {
+      'sui-select': 'relative w-full text-sm text-gray-900',
+      'sui-select-button':
+        'bg-transparent border-none flex outline rounded-1 h-10 w-full outline-1 outline-gray-200 px-4 transition-colors relative items-center justify-between focus:outline-dark-600 focus:outline-2',
+
+      'sui-select-label': 'transition duration-300 left-4 pointer-events-none absolute',
+      'sui-select-dropdown':
+        'bg-white border flex flex-col min-w-full rounded-1 w-full max-h-48 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
+
+      'sui-select-dropdown-item': 'py-2 px-4 hover:bg-light-600',
+    },
     {
       // toast
       'sui-toast-layout': 'fixed left-50% top-70px -translate-x-50% center flex-col gap-4 z-9999 pointer-events-none',

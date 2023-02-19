@@ -36,14 +36,9 @@ onClickOutside(selectRef, () => (isOpen.value = false))
 </script>
 
 <template>
-  <div ref="selectRef" class="relative w-full text-sm text-gray-900">
+  <div ref="selectRef" class="sui-select">
     <!-- select button -->
-    <div
-      @keyup.enter="isOpen = !isOpen"
-      @click="isOpen = !isOpen"
-      tabindex="0"
-      class="bg-transparent border-none flex outline rounded-1 h-10 w-full outline-1 outline-gray-200 px-4 transition-colors relative items-center justify-between focus:outline-dark-600 focus:outline-2"
-    >
+    <div @keyup.enter="isOpen = !isOpen" @click="isOpen = !isOpen" tabindex="0" class="sui-select-button">
       <span class="grow">
         {{ selectedOption?.label }}
       </span>
@@ -54,21 +49,18 @@ onClickOutside(selectRef, () => (isOpen.value = false))
           'floating-label': p.modelValue || isOpen,
           'text-gray-400': !isOpen,
         }"
-        class="transition duration-300 left-4 pointer-events-none absolute"
+        class="sui-select-label"
       >
         {{ p.label }}
       </span>
     </div>
 
     <!-- select menu -->
-    <ul
-      v-show="isOpen"
-      class="bg-white border flex flex-col min-w-full rounded-1 w-max w-full max-h-48 top-110% left-0 z-1 absolute overflow-y-auto"
-    >
+    <ul v-show="isOpen" class="sui-select-dropdown shadow">
       <li
         v-for="option in p.options"
         :key="option.label"
-        class="py-2 px-4 hover:bg-light-600"
+        class="sui-select-dropdown-item list-none"
         @click="handleSelect(option)"
       >
         {{ option.label }}
@@ -76,12 +68,3 @@ onClickOutside(selectRef, () => (isOpen.value = false))
     </ul>
   </div>
 </template>
-
-<style scoped>
-.sui-select-container {
-  position: relative;
-  font-size: var(--s-font-size-sm);
-}
-.sui-select {
-}
-</style>

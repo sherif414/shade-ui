@@ -42,7 +42,7 @@ const variantClasses = computed(() => {
 </script>
 
 <template>
-  <button :disabled="p.disabled || p.loading" :type="p.type" class="sui-button" :class="[variantClasses, sizeClasses]">
+  <button :disabled="p.disabled" :type="p.type" class="sui-button" :class="[variantClasses, sizeClasses]">
     <ILoading class="absolute!" v-if="p.loading" />
     <div :class="p.loading && 'opacity-0'">
       <slot name="iconPrepend" />

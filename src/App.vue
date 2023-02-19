@@ -1,8 +1,9 @@
 <script setup lang="ts">
 import { useToast } from './composables/toast'
-import { SButton } from './components/button'
+import { Button } from './components/button'
+import { Select } from './components/select'
+import { Input } from './components/input'
 import { ref } from 'vue'
-import SInput from './components/input/input.vue'
 import IconUser from './components/icons/IconUser.vue'
 
 const options: { label: string; value: string }[] = []
@@ -14,7 +15,7 @@ for (let i = 0; i < 10; i++) {
   })
 }
 const bool = ref(true)
-const v = ref('value')
+const v = ref('')
 function timeout() {
   bool.value = true
   setTimeout(() => {
@@ -25,18 +26,8 @@ function timeout() {
 
 <template>
   <main class="grid gap-4 place-items-center bg-light-1 min-h-screen font-sans">
-    <form @submit.prevent="" class="column gap-4 rounded-3 p-4 pt-6 gap-8 max-w-300px">
-      {{ v }}
-      <SInput v-model="v" :readonly="bool" hint="this is a hint" label="username"> </SInput>
-      <SButton variant="text" size="sm" :loading="bool" @click="timeout">button</SButton>
-      <SButton :loading="bool" @click="timeout">button</SButton>
-      <SButton size="lg" :loading="true" @click="timeout">button</SButton>
-      <SButton :loading="bool" @click="timeout"
-        ><template #iconAppend> <IconUser /> </template
-      ></SButton>
-      <SButton :loading="bool" @click="timeout"
-        ><template #iconPrepend> <IconUser /> </template
-      ></SButton>
+    <form @submit.prevent="" class="gap-4 rounded-3 p-4 pt-6 gap-8 w-300px">
+      <Select v-model="v" :options="options" label="select" />
     </form>
   </main>
 </template>
@@ -44,5 +35,9 @@ function timeout() {
 <style>
 body {
   background: white;
+}
+
+* {
+  box-sizing: border-box;
 }
 </style>
