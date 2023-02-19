@@ -5,7 +5,7 @@ import { computed } from 'vue'
 export interface Props {
   loading?: boolean
   disabled?: boolean
-  variant?: 'text' | 'default'
+  variant?: 'text' | 'filled'
   size?: 'sm' | 'md' | 'lg'
   type?: 'submit' | 'button'
   iconOnly?: boolean
@@ -13,7 +13,7 @@ export interface Props {
 
 const p = withDefaults(defineProps<Props>(), {
   size: 'md',
-  variant: 'default',
+  variant: 'filled',
   type: 'button',
 })
 
@@ -35,7 +35,7 @@ const sizeClasses = computed<string>(() => {
 })
 
 const variantClasses = computed(() => {
-  if (p.variant === 'default') {
+  if (p.variant === 'filled') {
     return 'sui-button-v-filled'
   }
 
