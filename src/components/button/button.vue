@@ -14,7 +14,13 @@ const p = withDefaults(defineProps<Props>(), {
   size: 'md',
   variant: 'default',
   type: 'button',
+  loading: false,
+  disabled: false,
 })
+
+const emit = defineEmits<{
+  (e: 'click', event: Event): void
+}>()
 
 // !SECTION styles
 const slots = useSlots()
@@ -39,10 +45,21 @@ const variantClasses = computed(() => {
     return 'sui-button-v-text'
   }
 })
+
+function handleClick(e: Event) {
+  if (p.disabled || p.loading) return
+  emit('click', e)
+}
 </script>
 
 <template>
-  <button :disabled="p.disabled" :type="p.type" class="sui-button" :class="[variantClasses, sizeClasses]">
+  <button
+    @click="handleClick"
+    :disabled="p.disabled"
+    :type="p.type"
+    class="sui-button"
+    :class="[variantClasses, sizeClasses]"
+  >
     <ILoading class="absolute!" v-if="p.loading" />
     <div :class="p.loading && 'opacity-0'">
       <slot name="iconPrepend" />

@@ -14,20 +14,20 @@ for (let i = 0; i < 10; i++) {
     value: `${i}`,
   })
 }
-const bool = ref(true)
+const bool = ref(false)
 const v = ref('')
-function timeout() {
-  bool.value = true
-  setTimeout(() => {
-    bool.value = false
-  }, 2000)
+
+function hanldeClick(e: Event) {
+  console.log('clicked', e)
 }
 </script>
 
 <template>
   <main class="grid gap-4 place-items-center bg-light-1 min-h-screen font-sans">
     <form @submit.prevent="" class="gap-4 rounded-3 p-4 pt-6 gap-8 w-300px">
-      <Select v-model="v" :options="options" label="select" />
+      <!-- <Select v-model="v" :options="options" label="select" /> -->
+      <Button :loading="bool" @click="hanldeClick">button</Button>
+      <Button @click="bool = !bool">boolean</Button>
     </form>
   </main>
 </template>
