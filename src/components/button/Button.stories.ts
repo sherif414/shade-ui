@@ -9,12 +9,12 @@ const meta = {
     disabled: false,
     loading: false,
     type: 'button',
-    variant: 'default',
+    variant: 'filled',
   },
   argTypes: {
     size: { control: 'select', options: ['sm', 'md', 'lg'], defaultValue: 'md' },
     type: { control: 'select', options: ['submit', 'button'], defaultValue: 'button' },
-    variant: { control: 'select', options: ['default', 'text'], defaultValue: 'default' },
+    variant: { control: 'select', options: ['filled', 'text'], defaultValue: 'filled' },
   },
 
   render: (args) => ({
@@ -22,7 +22,7 @@ const meta = {
     setup() {
       return { args }
     },
-    template: `<Button v-bind="args">button</Button>`,
+    template: `<Button v-bind="args">{{args.default.value}}</Button>`,
   }),
 } satisfies Meta<typeof Button>
 
