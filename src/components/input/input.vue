@@ -56,11 +56,6 @@ const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
 <template>
   <div :class="[p.error && 'text-red-400!', p.class, 'column items-start gap-1 w-full relative']">
     <div @click="emit('click')" class="sui-input-wrapper">
-      <!-- 👉 prepend icon -->
-      <div v-if="$slots.iconPrepend" class="sui-input-icon-prepend">
-        <slot name="iconPrepend"></slot>
-      </div>
-
       <!-- 👉 input -->
       <input
         ref="inputEl"
@@ -82,12 +77,16 @@ const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
         :readonly="p.readonly"
         :value="p.modelValue"
       />
+      <!-- 👉 prepend icon -->
+      <div v-if="$slots.iconPrepend" class="sui-input-icon-prepend peer-focus:text-primary-700!">
+        <slot name="iconPrepend"></slot>
+      </div>
 
       <!-- 👉 label -->
       <label :for="inputId" v-if="p.label" :class="[labelClasses, 'sui-input-label']">{{ p.label }}</label>
 
       <!-- 👉 appended icon -->
-      <div v-if="$slots.iconAppend" class="sui-input-icon-append">
+      <div v-if="$slots.iconAppend" class="sui-input-icon-append peer-focus:text-primary-700!">
         <slot name="iconAppend"></slot>
       </div>
     </div>
