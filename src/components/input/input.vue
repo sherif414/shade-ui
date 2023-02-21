@@ -31,20 +31,22 @@ const emit = defineEmits<{
 const { class: _, ...fallThroughAttrs } = useAttrs()
 
 // 👉 computed classes
-const sizeClasses = computed(() => {
+const sizeInputClasses = computed(() => {
   if (p.size === 'sm') return `sui-input-size-sm ${p.iconPrepend ? 'pl-9' : ''} ${p.iconAppend ? 'pr-9' : ''}`
   if (p.size === 'md') return `sui-input-size-md ${p.iconPrepend ? 'pl-11' : ''} ${p.iconAppend ? 'pr-11' : ''}`
   if (p.size === 'lg') return `sui-input-size-lg ${p.iconPrepend ? 'pl-13' : ''} ${p.iconAppend ? 'pr-13' : ''}`
 })
 
-const labelClasses = computed(() => {
-  if (p.iconPrepend) {
-    return {
-      'text-xs left-8': p.size === 'sm',
-      'text-sm left-10': p.size === 'md',
-      'text-base left-12': p.size === 'lg',
-    }
-  }
+const labelSizeClasses = computed(() => {
+  if (p.size === 'sm') return `text-xs ${p.iconPrepend ? 'left-8' : ''}`
+  if (p.size === 'md') return `text-sm ${p.iconPrepend ? 'left-10' : ''}`
+  if (p.size === 'lg') return `text-base ${p.iconPrepend ? 'left-12' : ''}`
+})
+
+const iconSizeClasses = computed(() => {
+  if (p.size === 'sm') return 'w-3 h-3'
+  if (p.size === 'md') return 'w-4 h-4'
+  if (p.size === 'lg') return 'w-5 h-5'
 })
 
 // 👉 input attributes
@@ -62,7 +64,7 @@ const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
         v-bind="fallThroughAttrs"
         placeholder=" "
         @[eventType]="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
-        :class="[{ 'outline-red-400!': p.error }, sizeClasses, 'sui-input peer']"
+        :class="[{ 'outline-red-400!': p.error }, sizeInputClasses, 'sui-input peer']"
         :id="inputId"
         :type="p.type"
         :disabled="p.disabled"
@@ -70,36 +72,21 @@ const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
         :value="p.modelValue"
       />
       <!-- 👉 prepend icon -->
-      <div v-if="p.iconPrepend" class="sui-input-icon left-0 peer-focus:text-primary-700!">
-        <Component
-          :class="{ 'w-3 h-3': p.size === 'sm', 'w-4 h-4': p.size === 'md', 'w-5 h-5': p.size === 'lg' }"
-          :is="p.iconPrepend"
-        />
+      <div v-if="p.iconPrepend" class="sui-input-icon left-0">
+        <Component :class="iconSizeClasses" :is="p.iconPrepend" />
       </div>
 
       <!-- 👉 label -->
-      <label
-        :for="inputId"
-        v-if="p.label"
-        :class="[
-          labelClasses,
-          'sui-input-label',
-          { 'text-xs': p.size === 'sm', 'text-sm': p.size === 'md', 'text-base': size === 'lg' },
-        ]"
-        >{{ p.label }}</label
-      >
+      <label :for="inputId" v-if="p.label" :class="[labelSizeClasses, 'sui-input-label']">{{ p.label }}</label>
 
       <!-- 👉 appended icon -->
-      <div v-if="p.iconAppend" class="sui-input-icon right-0 peer-focus:text-primary-700!">
-        <Component
-          :class="{ 'w-3 h-3': p.size === 'sm', 'w-4 h-4': p.size === 'md', 'w-5 h-5': p.size === 'lg' }"
-          :is="p.iconAppend"
-        />
+      <div v-if="p.iconAppend" class="sui-input-icon right-0">
+        <Component :class="iconSizeClasses" :is="p.iconAppend" />
       </div>
     </div>
 
     <!-- 👉 hint & error -->
-    <small v-if="p.error || p.hint" :class="[!p.error && 'text-gray-400', 'text-xs']">
+    <small v-if="p.error || p.hint" :class="[!p.error && 'text-gray-400', 'text-xs pl-2']">
       {{ p.error ? p.errorMessage || p.hint : p.hint }}
     </small>
 

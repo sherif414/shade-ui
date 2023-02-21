@@ -81,7 +81,7 @@ export default defineConfig({
       'sui-input-size-sm': 'h-9 text-xs',
       'sui-input-size-md': 'h-11 text-sm',
       'sui-input-size-lg': 'h-13 text-base',
-      'sui-input-icon': 'absolute aspect-square h-full center pointer-events-none',
+      'sui-input-icon': 'absolute aspect-square h-full center pointer-events-none peer-focus:text-primary-700!',
       'sui-input-label':
         'w-max px-1 text-on-disabled left-3 top-50% translate-y--50% transition-all duration-300 pointer-events-none absolute peer-not-placeholder-shown:floating-label peer-focus:(floating-label text-primary-700!)',
     },
