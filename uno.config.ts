@@ -34,7 +34,7 @@ export default defineConfig({
       dropdown: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
     },
     colors: {
-      disabled: '#e5e7eb',
+      disabled: '#f3f4f6',
       primary: {
         50: '#f5f3ff',
         100: '#ede9fe',
@@ -67,7 +67,8 @@ export default defineConfig({
         'center border-none cursor-pointer font-medium outline outline-transparent rounded-3 leading-none transition whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-700 outline-2 outline-offset-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
       'sui-button-v-filled': 'hover:bg-primary-800 bg-primary-700 text-on-primary',
       'sui-button-v-text': 'hover:bg-primary-100 bg-transparent',
-      'sui-button-v-outline': 'hover:bg-primary-100 bg-transparent outline-1 outline-neutral-200',
+      'sui-button-v-outline':
+        'hover:bg-primary-100 bg-transparent outline-1 outline-neutral-200 disabled:outline-transparent',
       'sui-button-size-sm': 'px-4 h-9 text-xs gap-2',
       'sui-button-size-md': 'px-6 h-11 text-sm gap-2',
       'sui-button-size-lg': 'px-8 h-12 text-base gap-4',
@@ -77,17 +78,17 @@ export default defineConfig({
     {
       'sui-input-wrapper': 'relative w-full row justify-start',
       'sui-input':
-        'grow bg-transparent border-none outline rounded-3 h-11 w-full outline-neutral-200 outline-1 disabled:(cursor-not-allowed outline-transparent bg-light-900) px-4 transition-colors placeholder:text-sm focus:(outline-primary-700 outline-2)',
+        'grow bg-transparent border-none outline rounded-3 h-11 w-full outline-neutral-200 outline-1 disabled:(cursor-not-allowed outline-transparent bg-disabled) px-4 transition-colors focus:(outline-primary-700 outline-2)',
       'sui-input-size-sm': 'h-9 text-xs',
       'sui-input-size-md': 'h-11 text-sm',
       'sui-input-size-lg': 'h-13 text-base',
-      'sui-input-icon': 'absolute aspect-square h-full center pointer-events-none peer-focus:text-primary-700!',
+      'sui-input-icon': 'absolute aspect-square h-full center pointer-events-none',
       'sui-input-label':
-        'w-max px-1 text-on-disabled left-3 top-50% translate-y--50% transition-all duration-300 pointer-events-none absolute peer-not-placeholder-shown:floating-label peer-focus:(floating-label text-primary-700!)',
+        'w-max px-1 left-3 top-50% translate-y--50% transition-all duration-300 pointer-events-none absolute peer-not-placeholder-shown:floating-label peer-focus:floating-label',
     },
     // select
     {
-      'sui-select': 'relative w-full text-sm text-gray-900',
+      'sui-select': 'relative w-full text-sm',
       'sui-select-dropdown':
         ' list-none bg-white border flex flex-col shadow-dropdown rounded-3 w-full max-h-50 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
 

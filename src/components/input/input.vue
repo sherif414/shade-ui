@@ -1,5 +1,6 @@
 <script setup lang="ts">
-import { useAttrs, computed } from 'vue'
+import { useFocus } from '@vueuse/core'
+import { useAttrs, computed, ref } from 'vue'
 
 export interface Props {
   label?: string
@@ -53,11 +54,21 @@ const iconSizeClasses = computed(() => {
 // ❕ vue doesn't provide .lazy modifier for custom component v-model
 const eventType = computed(() => (p.modelModifiers?.lazy ? 'change' : 'input'))
 const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
+const inputEl = ref<HTMLInputElement | null>(null)
+const { focused: isFocus } = useFocus(inputEl)
 </script>
 
 <template>
-  <div :class="[p.error && 'text-red-400!', p.class, 'column items-start gap-1 w-full relative']">
-    <div @click="emit('click')" class="sui-input-wrapper">
+  <div :class="[p.class, 'column items-start gap-1 w-full relative']">
+    <div
+      @click="emit('click')"
+      :class="[
+        p.error && 'text-red-400!',
+        isFocus ? 'text-primary-700' : 'text-gray-400',
+        p.disabled && 'text-on-disabled',
+        'sui-input-wrapper',
+      ]"
+    >
       <!-- 👉 input -->
       <input
         ref="inputEl"
@@ -86,7 +97,7 @@ const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
     </div>
 
     <!-- 👉 hint & error -->
-    <small v-if="p.error || p.hint" :class="[!p.error && 'text-gray-400', 'text-xs pl-2']">
+    <small v-if="p.error || p.hint" :class="[p.error ? 'text-red-400' : 'text-on-disabled', 'text-xs pl-2']">
       {{ p.error ? p.errorMessage || p.hint : p.hint }}
     </small>
 
