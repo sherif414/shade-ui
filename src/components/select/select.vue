@@ -18,9 +18,9 @@ export interface Props {
   error?: boolean
   errorMessage?: string
   hint?: string
-  class?: string
   size?: 'sm' | 'md' | 'lg'
   options?: Option[]
+  icon?: any
 }
 
 const p = withDefaults(defineProps<Props>(), {
@@ -42,10 +42,6 @@ function handleSelect(option: Option): void {
 
 const selectRef = ref<HTMLElement | null>(null)
 onClickOutside(selectRef, () => (isDropdownVisible.value = false))
-
-function handleClick() {
-  isDropdownVisible.value = !isDropdownVisible.value
-}
 </script>
 
 <template>
@@ -59,23 +55,15 @@ function handleClick() {
       :errorMessage="p.errorMessage"
       :disabled="p.disabled"
       :hint="p.hint"
-      style="cursor: default"
-      @click="handleClick"
+      :icon-prepend="p.icon"
+      :icon-append="ChevronDownIcon"
+      style="cursor: pointer"
+      @click="isDropdownVisible = !isDropdownVisible"
     >
-      <!-- 👉 select icon -->
-      <template v-if="$slots.icon" #iconPrepend>
-        <slot name="icon"></slot>
-      </template>
-
-      <!-- 👉 select icon -->
-      <template #iconAppend>
-        <ChevronDownIcon :class="[isDropdownVisible && 'rotate-180', 'w-4 h-4']" />
-      </template>
-
       <!-- 👉 select dropdown -->
       <template #dropdown>
         <ul v-show="isDropdownVisible" class="sui-select-dropdown">
-          <slot name="dropdown" :handleSelect="handleSelect">
+          <slot :handleSelect="handleSelect">
             <li
               v-for="option in p.options"
               :key="option.label"

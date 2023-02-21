@@ -30,6 +30,9 @@ gray: {
 
 export default defineConfig({
   theme: {
+    boxShadow: {
+      dropdown: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
+    },
     colors: {
       disabled: '#e5e7eb',
       primary: {
@@ -56,18 +59,18 @@ export default defineConfig({
       center: 'flex items-center justify-center',
       column: 'flex flex-col items-center',
       row: 'flex flex-row items-center',
-      'floating-label': 'scale-85 top--0.5 left-3 bg-white px-1',
+      'floating-label': 'scale-85 top--0.5 left-3 bg-white',
     },
     // button
     {
       'sui-button':
-        'center gap-2 border-none cursor-pointer font-medium outline outline-transparent rounded-3 leading-none transition whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-700 outline-2 outline-offset-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
+        'center border-none cursor-pointer font-medium outline outline-transparent rounded-3 leading-none transition whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-700 outline-2 outline-offset-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
       'sui-button-v-filled': 'hover:bg-primary-800 bg-primary-700 text-on-primary',
       'sui-button-v-text': 'hover:bg-primary-100 bg-transparent',
       'sui-button-v-outline': 'hover:bg-primary-100 bg-transparent outline-1 outline-neutral-200',
-      'sui-button-size-sm': 'px-4 h-9 text-xs',
-      'sui-button-size-md': 'px-6 h-11 text-sm',
-      'sui-button-size-lg': 'px-8 h-14 text-base',
+      'sui-button-size-sm': 'px-4 h-9 text-xs gap-2',
+      'sui-button-size-md': 'px-6 h-11 text-sm gap-2',
+      'sui-button-size-lg': 'px-8 h-12 text-base gap-4',
       'sui-button-icon-only': 'h-10 px-3 text-sm',
     },
     // input-input
@@ -75,21 +78,20 @@ export default defineConfig({
       'sui-input-wrapper': 'relative w-full row justify-start',
       'sui-input':
         'grow bg-transparent border-none outline rounded-3 h-11 w-full outline-neutral-200 outline-1 disabled:(cursor-not-allowed outline-transparent bg-light-900) px-4 transition-colors placeholder:text-sm focus:(outline-primary-700 outline-2)',
-      'sui-input-size-sm': 'h-9',
-      'sui-input-size-md': 'h-11',
-      'sui-input-size-lg': 'h-14',
-      'sui-input-icon-prepend': 'absolute w-10 h-full center left-0 pointer-events-none',
-      'sui-input-icon-append': 'absolute w-10 h-full center right-0 pointer-events-none',
+      'sui-input-size-sm': 'h-9 text-xs',
+      'sui-input-size-md': 'h-11 text-sm',
+      'sui-input-size-lg': 'h-13 text-base',
+      'sui-input-icon': 'absolute aspect-square h-full center pointer-events-none',
       'sui-input-label':
-        'w-max text-gray-400 left-4 top-50% translate-y--50% text-sm transition-all duration-300 pointer-events-none absolute',
+        'w-max px-1 text-on-disabled left-3 top-50% translate-y--50% transition-all duration-300 pointer-events-none absolute peer-not-placeholder-shown:floating-label peer-focus:(floating-label text-primary-700!)',
     },
     // select
     {
       'sui-select': 'relative w-full text-sm text-gray-900',
       'sui-select-dropdown':
-        ' list-none bg-white border flex flex-col shadow  rounded-4  w-full max-h-70 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
+        ' list-none bg-white border flex flex-col shadow-dropdown rounded-3 w-full max-h-50 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
 
-      'sui-select-dropdown-item': 'min-h-10 px-4 hover:bg-light-600 row',
+      'sui-select-dropdown-item': 'min-h-10 px-4 hover:bg-light-600 row cursor-pointer',
     },
     {
       // toast

@@ -57,7 +57,7 @@ function handleClick(e: Event) {
     :class="[variantClasses, sizeClasses]"
   >
     <ILoading class="absolute!" v-if="p.loading" />
-    <div :class="[p.loading && 'opacity-0', 'center gap-2']">
+    <div :class="[p.loading && 'opacity-0', p.size === 'lg' ? 'gap-4' : 'gap-2', 'center']">
       <slot />
     </div>
   </button>
