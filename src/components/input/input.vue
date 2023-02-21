@@ -15,29 +15,33 @@ export interface Props {
   size?: 'sm' | 'md' | 'lg'
 }
 
-// 👉 props, attrs, slots
+// 👉 props, emits, attrs, slots
 
 const p = withDefaults(defineProps<Props>(), {
   type: 'text',
   size: 'md',
 })
+
+const emit = defineEmits<{
+  (event: 'click'): void
+  (event: 'update:modelValue'): void
+}>()
+
 const { class: _, ...fallThroughAttrs } = useAttrs()
+
 const slots = useSlots()
 
 // 👉 computed classes
 const sizeClasses = computed(() => {
-  if (p.size === 'sm') return 'sui-select-size-sm'
-
-  if (p.size === 'md') return 'sui-select-size-md'
-
-  if (p.size === 'lg') return 'sui-select-size-lg'
-
-  return 'sui-select-size-md'
+  if (p.size === 'sm') return 'sui-input-size-sm'
+  if (p.size === 'md') return 'sui-input-size-md'
+  if (p.size === 'lg') return 'sui-input-size-lg'
+  return 'sui-input-size-md'
 })
 
 const labelClasses = computed(() => {
-  if (slots.icon) {
-    return 'peer-not-placeholder-shown:(floating-label translate-x--10!) peer-focus:(floating-label translate-x--10! text-primary-700!) left-10!'
+  if (slots.iconPrepend) {
+    return 'peer-not-placeholder-shown:(floating-label) peer-focus:(floating-label text-primary-700!) left-10'
   } else {
     return 'peer-not-placeholder-shown:floating-label peer-focus:(floating-label text-primary-700!)'
   }
@@ -50,11 +54,11 @@ const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
 </script>
 
 <template>
-  <div :class="[p.error && 'text-red-400!', p.class, 'column items-start gap-1 w-full']">
-    <div class="sui-input-wrapper">
-      <!-- 👉 appended icon -->
-      <div v-if="$slots.icon" class="sui-input-icon">
-        <slot name="icon"></slot>
+  <div :class="[p.error && 'text-red-400!', p.class, 'column items-start gap-1 w-full relative']">
+    <div @click="emit('click')" class="sui-input-wrapper">
+      <!-- 👉 prepend icon -->
+      <div v-if="$slots.iconPrepend" class="sui-input-icon-prepend">
+        <slot name="iconPrepend"></slot>
       </div>
 
       <!-- 👉 input -->
@@ -63,7 +67,15 @@ const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
         v-bind="fallThroughAttrs"
         placeholder=" "
         @[eventType]="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
-        :class="[{ 'outline-red-400!': p.error, 'pl-10': $slots.icon }, sizeClasses, 'sui-input peer']"
+        :class="[
+          {
+            'outline-red-400!': p.error,
+            'pl-10': $slots.iconPrepend,
+            'pr-10': $slots.iconAppend,
+          },
+          sizeClasses,
+          'sui-input peer',
+        ]"
         :id="inputId"
         :type="p.type"
         :disabled="p.disabled"
@@ -72,13 +84,20 @@ const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
       />
 
       <!-- 👉 label -->
-      <label :for="inputId" v-if="p.label" :class="['sui-input-label', labelClasses]">{{ p.label }}</label>
+      <label :for="inputId" v-if="p.label" :class="[labelClasses, 'sui-input-label']">{{ p.label }}</label>
+
+      <!-- 👉 appended icon -->
+      <div v-if="$slots.iconAppend" class="sui-input-icon-append">
+        <slot name="iconAppend"></slot>
+      </div>
     </div>
 
     <!-- 👉 hint & error -->
     <small v-if="p.error || p.hint" :class="[!p.error && 'text-gray-400', 'text-xs']">
       {{ p.error ? p.errorMessage || p.hint : p.hint }}
     </small>
+
+    <slot name="dropdown"></slot>
   </div>
 </template>
 
