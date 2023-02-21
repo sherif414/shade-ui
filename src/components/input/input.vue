@@ -18,7 +18,7 @@ export interface Props {
   iconAppend?: any
 }
 
-// 👉 props, emits, attrs
+// props, emits, attrs
 const p = withDefaults(defineProps<Props>(), {
   type: 'text',
   size: 'md',
@@ -31,7 +31,7 @@ const emit = defineEmits<{
 
 const { class: _, ...fallThroughAttrs } = useAttrs()
 
-// 👉 computed classes
+// computed classes
 const sizeInputClasses = computed(() => {
   if (p.size === 'sm') return `sui-input-size-sm ${p.iconPrepend ? 'pl-9' : ''} ${p.iconAppend ? 'pr-9' : ''}`
   if (p.size === 'md') return `sui-input-size-md ${p.iconPrepend ? 'pl-11' : ''} ${p.iconAppend ? 'pr-11' : ''}`
@@ -50,7 +50,7 @@ const iconSizeClasses = computed(() => {
   if (p.size === 'lg') return 'w-5 h-5'
 })
 
-// 👉 input attributes
+// input attributes
 // ❕ vue doesn't provide .lazy modifier for custom component v-model
 const eventType = computed(() => (p.modelModifiers?.lazy ? 'change' : 'input'))
 const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
@@ -69,7 +69,7 @@ const { focused: isFocus } = useFocus(inputEl)
         'sui-input-wrapper',
       ]"
     >
-      <!-- 👉 input -->
+      <!-- input -->
       <input
         ref="inputEl"
         v-bind="fallThroughAttrs"
@@ -82,21 +82,21 @@ const { focused: isFocus } = useFocus(inputEl)
         :readonly="p.readonly"
         :value="p.modelValue"
       />
-      <!-- 👉 prepend icon -->
+      <!-- prepend icon -->
       <div v-if="p.iconPrepend" class="sui-input-icon left-0">
         <Component :class="iconSizeClasses" :is="p.iconPrepend" />
       </div>
 
-      <!-- 👉 label -->
+      <!-- label -->
       <label :for="inputId" v-if="p.label" :class="[labelSizeClasses, 'sui-input-label']">{{ p.label }}</label>
 
-      <!-- 👉 appended icon -->
+      <!-- appended icon -->
       <div v-if="p.iconAppend" class="sui-input-icon right-0">
         <Component :class="iconSizeClasses" :is="p.iconAppend" />
       </div>
     </div>
 
-    <!-- 👉 hint & error -->
+    <!-- hint & error -->
     <small v-if="p.error || p.hint" :class="[p.error ? 'text-red-400' : 'text-on-disabled', 'text-xs pl-2']">
       {{ p.error ? p.errorMessage || p.hint : p.hint }}
     </small>
