@@ -32,7 +32,9 @@ function handleClick(option: any) {
         </template>
       </Select>
       <Input :readonly="bool" label="username" />
-      <Button variant="text">save</Button>
+      <Button :disabled="bool" variant="filled">save</Button>
+      <Button :disabled="bool" variant="text">save</Button>
+      <Button :disabled="bool" variant="outline">save</Button>
       <Button icon-only @click="bool = !bool"><IconUser /></Button>
     </form>
   </main>
