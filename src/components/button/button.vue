@@ -5,7 +5,7 @@ import { computed } from 'vue'
 export interface Props {
   loading?: boolean
   disabled?: boolean
-  variant?: 'text' | 'filled'
+  variant?: 'text' | 'filled' | 'outline'
   size?: 'sm' | 'md' | 'lg'
   type?: 'submit' | 'button'
   iconOnly?: boolean
@@ -24,13 +24,9 @@ const emit = defineEmits<{
 // !SECTION styles
 const sizeClasses = computed<string>(() => {
   if (p.iconOnly) return 'sui-button-icon-only'
-
   if (p.size === 'sm') return 'sui-button-size-sm'
-
   if (p.size === 'md') return 'sui-button-size-md'
-
   if (p.size === 'lg') return 'sui-button-size-lg'
-
   return 'sui-button-size-md'
 })
 
@@ -38,9 +34,11 @@ const variantClasses = computed(() => {
   if (p.variant === 'filled') {
     return 'sui-button-v-filled'
   }
-
   if (p.variant === 'text') {
     return 'sui-button-v-text'
+  }
+  if (p.variant === 'outline') {
+    return 'sui-button-v-outline'
   }
 })
 

@@ -61,9 +61,10 @@ export default defineConfig({
     // button
     {
       'sui-button':
-        'center gap-2 border-none cursor-pointer font-medium outline outline-transparent rounded-4 leading-none outline-2 outline-offset-2 transition whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:outline-primary-700 disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
+        'center gap-2 border-none cursor-pointer font-medium outline outline-transparent rounded-3 leading-none transition whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-700 outline-2 outline-offset-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
       'sui-button-v-filled': 'hover:bg-primary-800 bg-primary-700 text-on-primary',
       'sui-button-v-text': 'hover:bg-primary-100 bg-transparent',
+      'sui-button-v-outline': 'hover:bg-primary-100 bg-transparent outline-1 outline-neutral-200',
       'sui-button-size-sm': 'px-4 h-9 text-xs',
       'sui-button-size-md': 'px-6 h-11 text-sm',
       'sui-button-size-lg': 'px-8 h-14 text-base',
