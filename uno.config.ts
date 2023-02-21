@@ -56,7 +56,7 @@ export default defineConfig({
       center: 'flex items-center justify-center',
       column: 'flex flex-col items-center',
       row: 'flex flex-row items-center',
-      'floating-label': 'scale-85 top--0.5 left-3 bg-white',
+      'floating-label': 'scale-85 top--0.5 left-3 bg-white px-1',
     },
     // button
     {
@@ -73,24 +73,18 @@ export default defineConfig({
     {
       'sui-input-wrapper': 'relative w-full row justify-start',
       'sui-input':
-        'grow bg-transparent border-none outline rounded-4 h-11 w-full outline-neutral-200 outline-1 read-only:(pointer-events-none outline-transparent bg-light-400) disabled:(cursor-not-allowed outline-transparent bg-light-900) px-4 transition-colors placeholder:text-sm focus:(outline-primary-700 outline-2) read-only:focus:(outline-gray-200 outline-1 cursor-default)',
+        'grow bg-transparent border-none outline rounded-3 h-11 w-full outline-neutral-200 outline-1 disabled:(cursor-not-allowed outline-transparent bg-light-900) px-4 transition-colors placeholder:text-sm focus:(outline-primary-700 outline-2)',
       'sui-input-size-sm': 'h-9',
       'sui-input-size-md': 'h-11',
       'sui-input-size-lg': 'h-14',
-      'sui-input-icon': 'absolute w-10 h-full center left-0',
+      'sui-input-icon-prepend': 'absolute w-10 h-full center left-0 pointer-events-none',
+      'sui-input-icon-append': 'absolute w-10 h-full center right-0 pointer-events-none',
       'sui-input-label':
-        'w-max px-1 text-gray-400 left-4 top-50% translate-y--50% text-sm transition-all duration-300 pointer-events-none absolute',
+        'w-max text-gray-400 left-4 top-50% translate-y--50% text-sm transition-all duration-300 pointer-events-none absolute',
     },
     // select
     {
       'sui-select': 'relative w-full text-sm text-gray-900',
-      'sui-select-button':
-        'bg-transparent border-none flex outline rounded-3 [&:focus_.sui-select-label]:text-primary-700! w-full outline-1 outline-neutral-200 px-4 transition-colors relative items-center justify-between focus:outline-primary-700 focus:outline-2',
-      'sui-select-size-sm': 'h-9',
-      'sui-select-size-md': 'h-11',
-      'sui-select-size-lg': 'h-14',
-      'sui-select-label':
-        'transition-all duration-300 left-4 top-50% translate-y--50% pointer-events-none absolute px-1 text-gray-400',
       'sui-select-dropdown':
         ' list-none bg-white border flex flex-col shadow  rounded-4  w-full max-h-70 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
 
