@@ -32,7 +32,7 @@ const emit = defineEmits<{
 const { class: _, ...fallThroughAttrs } = useAttrs()
 
 // computed classes
-const sizeInputClasses = computed(() => {
+const inputSizeClasses = computed(() => {
   if (p.size === 'sm') return `sui-input-size-sm ${p.iconPrepend ? 'pl-9' : ''} ${p.iconAppend ? 'pr-9' : ''}`
   if (p.size === 'md') return `sui-input-size-md ${p.iconPrepend ? 'pl-11' : ''} ${p.iconAppend ? 'pr-11' : ''}`
   if (p.size === 'lg') return `sui-input-size-lg ${p.iconPrepend ? 'pl-13' : ''} ${p.iconAppend ? 'pr-13' : ''}`
@@ -55,7 +55,7 @@ const iconSizeClasses = computed(() => {
 const eventType = computed(() => (p.modelModifiers?.lazy ? 'change' : 'input'))
 const inputId = `${p.label}-${Math.round(Math.random() * 1000)}`
 const inputEl = ref<HTMLInputElement | null>(null)
-const { focused: isFocus } = useFocus(inputEl)
+const { focused: isFocused } = useFocus(inputEl)
 </script>
 
 <template>
@@ -64,8 +64,7 @@ const { focused: isFocus } = useFocus(inputEl)
       @click="emit('click')"
       :class="[
         p.error && 'text-red-400!',
-        isFocus ? 'text-primary-700' : 'text-gray-400',
-        p.disabled && 'text-on-disabled',
+        isFocused ? 'text-primary-700' : 'text-on-surface-muted',
         'sui-input-wrapper',
       ]"
     >
@@ -75,7 +74,7 @@ const { focused: isFocus } = useFocus(inputEl)
         v-bind="fallThroughAttrs"
         placeholder=" "
         @[eventType]="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
-        :class="[{ 'outline-red-400!': p.error }, sizeInputClasses, 'sui-input peer']"
+        :class="[{ 'outline-red-400!': p.error }, inputSizeClasses, 'sui-input peer']"
         :id="inputId"
         :type="p.type"
         :disabled="p.disabled"
@@ -97,11 +96,9 @@ const { focused: isFocus } = useFocus(inputEl)
     </div>
 
     <!-- hint & error -->
-    <small v-if="p.error || p.hint" :class="[p.error ? 'text-red-400' : 'text-on-disabled', 'text-xs pl-2']">
+    <small v-if="p.error || p.hint" :class="[p.error ? 'text-red-400' : 'text-on-surface-muted', 'text-xs pl-2']">
       {{ p.error ? p.errorMessage || p.hint : p.hint }}
     </small>
-
-    <slot name="dropdown"></slot>
   </div>
 </template>
 

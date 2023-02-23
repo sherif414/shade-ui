@@ -31,6 +31,7 @@
     "@storybook/vue3-vite": "7.0.0-beta.50",
     "@types/jsdom": "^21.1.0",
     "@types/node": "^18.14.0",
+    "@unocss/reset": "^0.49.7",
     "@vitejs/plugin-vue": "^4.0.0",
     "@vue/test-utils": "^2.2.10",
     "@vue/tsconfig": "^0.1.3",

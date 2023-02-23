@@ -49,7 +49,11 @@ export default defineConfig({
       },
       on: {
         primary: '#f3f4f6',
-        disabled: '#9ca3af',
+        disabled: '#d1d5db',
+        surface: {
+          DEFAULT: '#111827',
+          muted: '#9ca3af',
+        },
       },
     },
   },
@@ -59,14 +63,14 @@ export default defineConfig({
       center: 'flex items-center justify-center',
       column: 'flex flex-col items-center',
       row: 'flex flex-row items-center',
-      'floating-label': 'scale-85 top--0.5 left-3 bg-white',
+      'floating-label': 'scale-80 top--0.5 left-1 bg-white',
     },
     // button
     {
       'sui-button':
-        'center border-none cursor-pointer font-medium outline outline-transparent rounded-3 leading-none transition whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-700 outline-2 outline-offset-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
-      'sui-button-v-filled': 'hover:bg-primary-800 bg-primary-700 text-on-primary',
-      'sui-button-v-text': 'hover:bg-primary-100 bg-transparent',
+        'center border-none cursor-pointer outline outline-transparent rounded-3 leading-none transition whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-700 outline-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
+      'sui-button-v-filled': 'hover:bg-primary-800 bg-primary-700 text-on-primary focus-visible:outline-offset-2',
+      'sui-button-v-text': 'hover:bg-neutral-100 bg-transparent',
       'sui-button-v-outline':
         'hover:bg-primary-100 bg-transparent outline-1 outline-neutral-200 disabled:outline-transparent',
       'sui-button-size-sm': 'px-4 h-9 text-xs gap-2',
@@ -78,21 +82,35 @@ export default defineConfig({
     {
       'sui-input-wrapper': 'relative w-full row justify-start',
       'sui-input':
-        'grow bg-transparent border-none outline rounded-3 h-11 w-full outline-neutral-200 outline-1 disabled:(cursor-not-allowed outline-transparent bg-disabled) px-4 transition-colors focus:(outline-primary-700 outline-2)',
+        'text-on-surface grow bg-transparent border-none outline rounded-3 w-full outline-neutral-200 outline-1 disabled:(cursor-not-allowed! outline-transparent bg-disabled text-on-disabled) px-4 transition-colors focus:(outline-primary-700 outline-2)',
       'sui-input-size-sm': 'h-9 text-xs',
       'sui-input-size-md': 'h-11 text-sm',
       'sui-input-size-lg': 'h-13 text-base',
-      'sui-input-icon': 'absolute aspect-square h-full center pointer-events-none',
+      'sui-input-icon': 'absolute top-50% translate-y--50% aspect-square h-full center pointer-events-none',
       'sui-input-label':
-        'w-max px-1 left-3 top-50% translate-y--50% transition-all duration-300 pointer-events-none absolute peer-not-placeholder-shown:floating-label peer-focus:floating-label',
+        'w-max px-1 left-3 top-50% translate-y--50% transition-all duration-200 pointer-events-none absolute peer-not-placeholder-shown:floating-label peer-focus:floating-label peer-disabled:text-on-disabled',
     },
     // select
     {
-      'sui-select': 'relative w-full text-sm',
+      'sui-select-wrapper': 'relative w-full',
+
+      'sui-select-trigger':
+        'text-on-surface-muted gap-4 relative row bg-transparent border-none outline rounded-3 w-full outline-neutral-200 outline-1 px-4 transition-colors cursor-pointer sui-disabled:(bg-disabled! text-on-disabled! outline-transparent! pointer-events-none)',
+
+      'sui-select-size-sm': '[&_.sui-select-trigger]:h-9 text-xs [&_.sui-select-icon_>_*]:(w-3 h-3)',
+      'sui-select-size-md': '[&_.sui-select-trigger]:h-11 text-sm [&_.sui-select-icon_>_*]:(w-4 h-4)',
+      'sui-select-size-lg': '[&_.sui-select-trigger]:h-13 text-base [&_.sui-select-icon_>_*]:(w-5 h-5)',
+
+      'sui-select-icon': 'aspect-square center',
+
+      'sui-select-label':
+        'w-max px-1 left-3 top-50% translate-y--50% transition-all duration-200 pointer-events-none absolute',
+
       'sui-select-dropdown':
         ' list-none bg-white border flex flex-col shadow-dropdown rounded-3 w-full max-h-50 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
 
-      'sui-select-dropdown-item': 'min-h-10 px-4 hover:bg-light-600 row cursor-pointer',
+      'sui-select-dropdown-item':
+        'min-h-10 px-4 row cursor-pointer row justify-between gap-2 transition-all duration-300 ease-out sui-disabled:(text-on-disabled! cursor-default!) hover-sui-enabled:(bg-neutral-100 pl-5)',
     },
     {
       // toast
@@ -104,6 +122,24 @@ export default defineConfig({
       'toast-error': 'bg-red bg-opacity-10 text-red shadow',
       'toast-info': 'bg-blue bg-opacity-10 text-blue shadow',
       'toast-notification': 'bg-blue bg-opacity-10 text-blue shadow',
+    },
+  ],
+  variants: [
+    // disabled:
+    (matcher) => {
+      if (!matcher.startsWith('sui-disabled:')) return matcher
+      return {
+        matcher: matcher.slice(13),
+        selector: (s) => `${s}:disabled, ${s}[data-disabled="true"]`,
+      }
+    },
+    // enabled
+    (matcher) => {
+      if (!matcher.startsWith('sui-enabled:')) return matcher
+      return {
+        matcher: matcher.slice(12),
+        selector: (s) => `${s}:enabled, ${s}[data-disabled="false"]`,
+      }
     },
   ],
   // ...
