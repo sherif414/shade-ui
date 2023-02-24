@@ -64,7 +64,7 @@ const { focused: isFocused } = useFocus(inputEl)
       @click="emit('click')"
       :class="[
         p.error && 'text-red-400!',
-        isFocused ? 'text-primary-700' : 'text-on-surface-muted',
+        isFocused ? 'text-on-surface' : 'text-on-surface-muted',
         'sui-input-wrapper',
       ]"
     >

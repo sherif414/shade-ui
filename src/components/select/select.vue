@@ -3,7 +3,6 @@ import { onClickOutside, useFocus } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { Input } from '@/components/input'
 import { CheckCircleIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
-
 export type Option = {
   label: string
   value: any
@@ -26,12 +25,9 @@ export interface Props {
 const p = withDefaults(defineProps<Props>(), {
   size: 'md',
 })
-
 const emit = defineEmits<{
   (e: 'update:modelValue', value: Props['modelValue']): void
 }>()
-
-const isDropdownVisible = ref(false)
 
 // selection
 function handleSelect(option: Option): void {
@@ -40,9 +36,11 @@ function handleSelect(option: Option): void {
   isDropdownVisible.value = false
 }
 
+const isDropdownVisible = ref(false)
 const triggerRef = ref<HTMLElement | null>(null)
 const selectRef = ref<HTMLElement | null>(null)
 const { focused: isFocus } = useFocus(triggerRef)
+
 onClickOutside(selectRef, () => {
   isDropdownVisible.value = false
 })
@@ -67,18 +65,14 @@ const labelSizeClasses = computed(() => ({
 
 <template>
   <div>
-    <div
-      ref="selectRef"
-      :data-disabled="p.disabled"
-      :class="[selectSizeClasses, 'sui-select-wrapper sui-disabled:cursor-not-allowed']"
-    >
+    <div ref="selectRef" :data-disabled="p.disabled" :class="[selectSizeClasses, 'sui-select-wrapper']">
       <div
         ref="triggerRef"
         :tabindex="disabled ? '-1' : '0'"
         :data-disabled="p.disabled"
         :class="[
           {
-            'outline-2 outline-primary-700 text-primary-700': isFocus,
+            'bg-neutral-200 text-on-surface': isFocus,
             'outline-red-400! text-red-400!': p.error && !p.disabled,
           },
           'sui-select-trigger ',
@@ -90,7 +84,7 @@ const labelSizeClasses = computed(() => ({
           :class="[
             labelSizeClasses,
             {
-              'floating-label!': isFocus || p.modelValue?.label,
+              'floating-label!': modelValue?.label || isFocus,
             },
             'sui-select-label',
           ]"
@@ -104,7 +98,7 @@ const labelSizeClasses = computed(() => ({
         </div>
 
         <!-- value -->
-        <div class="text-on-surface grow">{{ p.modelValue?.label }}</div>
+        <div :class="[p.disabled ? 'text-on-disabled' : 'text-on-surface', 'grow']">{{ p.modelValue?.label }}</div>
 
         <!-- appended icon -->
         <div class="sui-select-icon right-0">
@@ -125,12 +119,12 @@ const labelSizeClasses = computed(() => ({
               v-for="option in p.options"
               :key="option.label"
               class="sui-select-dropdown-item"
-              :class="[p.modelValue?.label === option.label ? 'text-primary-700 font-medium' : '']"
+              :class="[p.modelValue?.label === option.label ? 'bg-neutral-100' : '']"
               @click="handleSelect(option)"
               :data-disabled="option.disabled"
             >
               {{ option.label }}
-              <CheckCircleIcon class="w-3 h-3 text-primary-700" v-if="p.modelValue?.label === option.label" />
+              <CheckCircleIcon class="w-3 h-3" v-if="p.modelValue?.label === option.label" />
             </li>
           </slot>
         </ul>
@@ -138,7 +132,10 @@ const labelSizeClasses = computed(() => ({
     </div>
 
     <!-- hint & error -->
-    <small v-if="p.error || p.hint" :class="[p.error ? 'text-red-400' : 'text-on-surface-muted', 'text-xs pl-2']">
+    <small
+      v-if="p.error || p.hint"
+      :class="[p.error ? 'text-red-400' : 'text-on-surface-muted', p.disabled && 'text-on-disabled!', 'text-xs pl-2']"
+    >
       {{ p.error ? p.errorMessage || p.hint : p.hint }}
     </small>
   </div>
