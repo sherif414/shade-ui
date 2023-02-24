@@ -72,7 +72,6 @@ const labelSizeClasses = computed(() => ({
         :data-disabled="p.disabled"
         :class="[
           {
-            'bg-neutral-200 text-on-surface': isFocus,
             'outline-red-400! text-red-400!': p.error && !p.disabled,
           },
           'sui-select-trigger ',
@@ -119,7 +118,7 @@ const labelSizeClasses = computed(() => ({
               v-for="option in p.options"
               :key="option.label"
               class="sui-select-dropdown-item"
-              :class="[p.modelValue?.label === option.label ? 'bg-neutral-100' : '']"
+              :class="[p.modelValue?.label === option.label ? 'bg-neutral-100 text-primary-600' : '']"
               @click="handleSelect(option)"
               :data-disabled="option.disabled"
             >
