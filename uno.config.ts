@@ -32,9 +32,16 @@ export default defineConfig({
   theme: {
     boxShadow: {
       dropdown: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
+      'checkbox-base': 'inset 0px 0px 0px 2px var(--un-shadow-color)',
+      'checkbox-hover': 'inset 0px 0px 0px 3px var(--un-shadow-color)',
+      'checkbox-active': 'inset 0px 0px 0px 12px var(--un-shadow-color)',
     },
     colors: {
       disabled: '#f3f4f6',
+      border: {
+        base: '#d1d5db',
+        active: '#7c3aed',
+      },
       primary: {
         50: '#f5f3ff',
         100: '#ede9fe',
@@ -115,8 +122,25 @@ export default defineConfig({
       'sui-select-dropdown-item':
         'min-h-10 px-4 row cursor-pointer row justify-between gap-2 transition-all duration-300 ease-out sui-disabled:(text-on-disabled! cursor-default!) hover-sui-enabled:(bg-neutral-100 pl-5)',
     },
+    // checkbox
     {
-      // toast
+      'sui-checkbox-wrapper': 'rounded-8px relative',
+      'sui-checkbox':
+        'cursor-pointer appearance-none outline-hidden border-none block m-0 p-0 rounded-inherit w-24px h-24px shadow-inset shadow-border-base shadow-checkbox-base checked:(shadow-checkbox-active shadow-border-active) not-checked-hover:(shadow-checkbox-hover shadow-border-active) not-checked:transition-shadow focus-visible:(outline outline-border-active outline-2)',
+      'sui-checkbox-svg': 'block absolute left-0 top-0 fill-white pointer-events-none scale-101 translate-z-0',
+      'sui-checkbox-check': 'fill-none stroke-2 stroke-white origin-[10.5px_16px] scale-100 translate-z-0',
+      'sui-checkbox-dot': 'origin-[10.5px_15.5px] translate-x-14px translate-y--14px translate-z-0 scale-100 ',
+    },
+    // switch
+    {
+      'sui-switch-wrapper': 'rounded-12px relative cursor-pointer',
+      'sui-switch':
+        'cursor-pointer appearance-none outline-hidden border-none bg-neutral-200 block m-0 p-0 rounded-inherit w-38px h-24px checked:bg-primary-600 focus-visible:(outline-2 outline outline-border-active)',
+      'sui-switch-svg':
+        'block absolute left-0 top-0 pointer-events-none fill-white w-38px h-24px scale-101 translate-z-0',
+    },
+    // toast
+    {
       'sui-toast-layout': 'fixed left-50% top-70px -translate-x-50% center flex-col gap-4 z-9999 pointer-events-none',
       'sui-toast': ' text-sm center gap-2 px-4 h-9 rounded-4px transition-all -translate-y-2.5 opacity-0',
       'sui-toast-content': 'max-w-500px truncate',
