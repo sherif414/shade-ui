@@ -102,6 +102,14 @@ export default defineConfig({
       'sui-input-label':
         'w-max left-3 px-1 top-50% translate-y--50% transition-all duration-200 ease-out pointer-events-none absolute peer-not-placeholder-shown:floating-label peer-focus:floating-label peer-disabled:text-on-disabled',
     },
+    // textarea
+    {
+      'sui-textarea-wrapper': 'relative w-full',
+      'sui-textarea':
+        ' px-4 py-2 text-on-surface bg-white border-none outline-neutral-200 rounded-8px w-full outline outline-1 disabled:(cursor-not-allowed! bg-disabled text-on-disabled outline-transparent) transition-colors focus:(outline-primary-600 outline-2)',
+      'sui-textarea-label':
+        'px-1 m-0 text-sm text-on-surface-muted w-max top-2 left-2 transition-all duration-200 ease-out pointer-events-none absolute',
+    },
     // select
     {
       'sui-select-wrapper': 'relative w-full sui-disabled:cursor-not-allowed',
