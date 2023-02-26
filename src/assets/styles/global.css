@@ -28,6 +28,9 @@
   --primary-900: #4c1d95;
 
   --disabled: #f3f4f6;
+  --c-background: #e5e5e5;
+  --c-outline-primary: var(--primary-600);
+  --c-surface-primary: var(--primary-600);
 
   --on-primary: #f3f4f6;
   --on-disabled: #d1d5db;

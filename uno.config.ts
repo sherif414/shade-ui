@@ -1,4 +1,3 @@
-// @unocss-includ
 import { defineConfig, transformerDirectives, transformerVariantGroup } from 'unocss'
 /** 
 gray: {
@@ -35,6 +34,9 @@ export default defineConfig({
       'checkbox-base': 'inset 0px 0px 0px 2px var(--un-shadow-color)',
       'checkbox-hover': 'inset 0px 0px 0px 3px var(--un-shadow-color)',
       'checkbox-active': 'inset 0px 0px 0px 12px var(--un-shadow-color)',
+      'radio-base': 'inset 0px 0px 0px 2px var(--un-shadow-color)',
+      'radio-hover': 'inset 0px 0px 0px 3px var(--un-shadow-color)',
+      'radio-active': 'inset 0px 0px 0px 6.75px var(--un-shadow-color)',
     },
     colors: {
       disabled: '#f3f4f6',
@@ -126,7 +128,7 @@ export default defineConfig({
     {
       'sui-checkbox-wrapper': 'rounded-8px relative',
       'sui-checkbox':
-        'cursor-pointer appearance-none outline-hidden border-none block m-0 p-0 rounded-inherit w-24px h-24px shadow-inset shadow-border-base shadow-checkbox-base checked:(shadow-checkbox-active shadow-border-active) not-checked-hover:(shadow-checkbox-hover shadow-border-active) not-checked:transition-shadow focus-visible:(outline outline-border-active outline-2)',
+        'cursor-pointer appearance-none outline-hidden border-none block m-0 p-0 rounded-inherit w-24px h-24px shadow-inset shadow-border-base shadow-checkbox-base disabled:(bg-neutral-200!) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) checked:(shadow-checkbox-active shadow-border-active) enabled-not-checked-hover:(shadow-checkbox-hover shadow-border-active) not-checked:transition-shadow focus-visible:(outline outline-border-active outline-2)',
       'sui-checkbox-svg': 'block absolute left-0 top-0 fill-white pointer-events-none scale-101 translate-z-0',
       'sui-checkbox-check': 'fill-none stroke-2 stroke-white origin-[10.5px_16px] scale-100 translate-z-0',
       'sui-checkbox-dot': 'origin-[10.5px_15.5px] translate-x-14px translate-y--14px translate-z-0 scale-100 ',
@@ -135,9 +137,15 @@ export default defineConfig({
     {
       'sui-switch-wrapper': 'rounded-12px relative cursor-pointer',
       'sui-switch':
-        'cursor-pointer appearance-none outline-hidden border-none bg-neutral-200 block m-0 p-0 rounded-inherit w-38px h-24px checked:bg-primary-600 focus-visible:(outline-2 outline outline-border-active)',
+        'disabled:(bg-neutral-200! cursor-not-allowed) disabled-checked:(bg-primary-200!) cursor-pointer appearance-none outline-hidden border-none bg-neutral-200 block m-0 p-0 rounded-inherit w-38px h-24px checked:bg-primary-600 focus-visible:(outline-2 outline outline-border-active)',
       'sui-switch-svg':
         'block absolute left-0 top-0 pointer-events-none fill-white w-38px h-24px scale-101 translate-z-0',
+    },
+    // radio
+    {
+      'sui-radio-wrapper': 'rounded-12px relative',
+      'sui-radio':
+        'disabled:(bg-neutral-200! cursor-not-allowed) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) appearance-none outline-hidden border-none bg-none block cursor-pointer m-0 p-0 rounded-inherit w-24px h-24px shadow-radio-base shadow-border-base checked:(shadow-border-active shadow-radio-active) not-checked:transition-shadow enabled-not-checked-hover:(shadow-border-active shadow-radio-hover)',
     },
     // toast
     {

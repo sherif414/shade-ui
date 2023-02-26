@@ -1,6 +1,15 @@
 <template>
   <div ref="checkboxRef" class="sui-checkbox-wrapper">
-    <input :value="p.value" v-model="data" v-bind="$attrs" class="sui-checkbox" ref="inputRef" type="checkbox" />
+    <input
+      :disabled="p.disabled"
+      :value="p.value"
+      v-model="data"
+      v-bind="$attrs"
+      class="sui-checkbox"
+      :class="[p.disabled && 'cursor-not-allowed!']"
+      ref="inputRef"
+      type="checkbox"
+    />
     <svg class="sui-checkbox-svg" width="24" height="24" viewBox="0 0 24 24" filter="url(#goo-light)">
       <path
         stroke-linecap="round"
@@ -33,6 +42,7 @@ export interface Props {
   label?: string
   modelValue?: boolean
   value?: string
+  disabled?: boolean
 }
 const emit = defineEmits<{
   (event: 'update:modelValue', value: boolean): void
