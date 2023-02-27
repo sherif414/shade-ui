@@ -25,6 +25,7 @@ const p = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
+  // TODO: is this really needed?
   (event: 'click'): void
   (event: 'update:modelValue'): void
 }>()

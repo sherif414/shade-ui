@@ -1,5 +1,5 @@
 <template>
-  <div class="sui-radio-wrapper">
+  <div class="sui-radio-wrapper inline-block">
     <input type="radio" ref="radioRef" v-bind="$attrs" v-model="data" class="sui-radio" />
     <svg
       class="block absolute top-0 left-0 pointer-events-none fill-white scale-101 translate-z-0 w-24px h-24px"
@@ -51,7 +51,7 @@ async function animation() {
 
   await animate(
     radioRef.value,
-    { boxShadow: ['inset 0 0 0 3px #d1d5db', 'inset 0 0 0 12px #7c3aed'] },
+    { boxShadow: ['inset 0 0 0 3px #d1d5db', 'inset 0 0 0 12px var(--un-shadow-color)'] },
     { duration: 0.3 }
   ).finished
   timeline([

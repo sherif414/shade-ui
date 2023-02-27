@@ -1,11 +1,12 @@
 <template>
-  <div ref="wrapperRef" class="sui-switch-wrapper">
+  <div ref="wrapperRef" class="sui-switch-wrapper inline-block">
     <input
       v-bind="$attrs"
       :name="p.name"
       :value="p.value"
       v-model="data"
-      class="sui-switch"
+      class="sui-switch transition-colors duration-300"
+      :class="data ? 'bg-primary-600' : 'bg-neutral-200'"
       ref="inputRef"
       type="checkbox"
     />
@@ -26,7 +27,7 @@
 
 <script setup lang="ts">
 import { useVModel } from '@vueuse/core'
-import { timeline, animate } from 'motion'
+import { animate, timeline } from 'motion'
 import { ref, watch } from 'vue'
 export interface Props {
   modelValue?: boolean | any[] | Set<any>
@@ -51,12 +52,10 @@ async function animation() {
 
   if (inputRef.value.checked) {
     animate(leftDotRef.value, { scale: [1, 0], x: [0, 8] }, { duration: 0.3, delay: 0.15 })
-    animate(inputRef.value, { background: ['var(--c-background)', 'var(--c-surface-primary)'] }, { duration: 0.3 })
     await animate(rightDotRef.value, { scale: [0, 1], x: [-8, 2] }, { duration: 0.3 }).finished
     await animate(rightDotRef.value, { x: [null, 0] }, { duration: 0.2 }).finished
   } else {
     animate(rightDotRef.value, { scale: [1, 0], x: [0, -8] }, { duration: 0.3, delay: 0.15 })
-    animate(inputRef.value, { background: ['var(--c-surface-primary)', 'var(--c-background)'] }, { duration: 0.3 })
     await animate(leftDotRef.value, { scale: [0, 1], x: [8, -2] }, { duration: 0.3 }).finished
     await animate(leftDotRef.value, { x: [null, 0] }, { duration: 0.2 }).finished
   }

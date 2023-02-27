@@ -25,6 +25,31 @@ gray: {
     800: '#5b21b6',
     900: '#4c1d95',
   },
+
+    magenta: {
+    50: '#F5E1F7',
+    100: '#ECBDF2',
+    200: '#CE80D9',
+    300: '#BB61C7',
+    400: '#AD4BB8',
+    500: '#A23DAD',
+    600: '#90279C',
+    700: '#7C1A87',
+    800: '#671270',
+    900: '#4E0754',
+  },
+    indigo: {
+    50: '#E0E8F9',
+    100: '#BED0F7',
+    200: '#98AEEB',
+    300: '#7B93DB',
+    400: '#647ACB',
+    500: '#4C63B6',
+    600: '#4055A8',
+    700: '#35469C',
+    800: '#2D3A8C',
+    900: '#19216C',
+  },
 */
 
 export default defineConfig({
@@ -40,21 +65,25 @@ export default defineConfig({
     },
     colors: {
       disabled: '#f3f4f6',
+      success: '#339900',
+      danger: '#ff0000',
+      warn: '#ffaa00',
       border: {
         base: '#d1d5db',
-        active: '#7c3aed',
+        active: '#90279C',
       },
       primary: {
-        50: '#f5f3ff',
-        100: '#ede9fe',
-        200: '#ddd6fe',
-        300: '#c4b5fd',
-        400: '#a78bfa',
-        500: '#8b5cf6',
-        600: '#7c3aed',
-        700: '#6d28d9',
-        800: '#5b21b6',
-        900: '#4c1d95',
+        50: '#F5E1F7',
+        100: '#ECBDF2',
+        200: '#CE80D9',
+        300: '#BB61C7',
+        400: '#AD4BB8',
+        500: '#A23DAD',
+        600: '#90279C',
+        700: '#7C1A87',
+        800: '#671270',
+        900: '#4E0754',
+        DEFAULT: '#90279C',
       },
       on: {
         primary: '#f3f4f6',
@@ -79,8 +108,7 @@ export default defineConfig({
       'sui-button':
         'center border-none cursor-pointer outline outline-transparent rounded-8px leading-none transition-all whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-600 outline-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
 
-      'sui-button-v-filled':
-        'hover:bg-primary-800 bg-primary-600 enabled:shadow-lg text-on-primary focus-visible:outline-offset-2',
+      'sui-button-v-filled': 'hover:bg-primary-800 bg-primary-600  text-on-primary focus-visible:outline-offset-2',
       'sui-button-v-text': 'hover:bg-neutral-100 bg-transparent',
       'sui-button-v-outline':
         'hover:(bg-light-600 outline-transparent) bg-transparent outline-1 outline-neutral-200 disabled:outline-transparent',
@@ -115,7 +143,7 @@ export default defineConfig({
       'sui-select-wrapper': 'relative w-full sui-disabled:cursor-not-allowed',
 
       'sui-select-trigger':
-        'text-on-surface-muted gap-4 relative row border-none outline rounded-8px w-full outline-neutral-200 outline-1 px-4 transition-colors cursor-pointer  sui-disabled:(bg-neutral-50! text-on-disabled! outline-transparent! pointer-events-none) focus:(outline-primary-600 outline-2 text-primary-600)',
+        'text-on-surface-muted gap-4 relative row border-none outline rounded-8px w-full outline-neutral-200 outline-1 px-4 transition-colors cursor-pointer  sui-disabled:(bg-disabled! text-on-disabled! outline-transparent! pointer-events-none) focus:(outline-primary-600 outline-2 text-primary-600)',
 
       'sui-select-size-sm': '[&_.sui-select-trigger]:h-9 text-xs [&_.sui-select-icon_>_*]:(w-3 h-3)',
       'sui-select-size-md': '[&_.sui-select-trigger]:h-11 text-sm [&_.sui-select-icon_>_*]:(w-4 h-4)',
@@ -136,7 +164,7 @@ export default defineConfig({
     {
       'sui-checkbox-wrapper': 'rounded-8px relative',
       'sui-checkbox':
-        'cursor-pointer appearance-none outline-hidden border-none block m-0 p-0 rounded-inherit w-24px h-24px shadow-inset shadow-border-base shadow-checkbox-base disabled:(bg-neutral-200!) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) checked:(shadow-checkbox-active shadow-border-active) enabled-not-checked-hover:(shadow-checkbox-hover shadow-border-active) not-checked:transition-shadow focus-visible:(outline outline-border-active outline-2)',
+        'cursor-pointer appearance-none outline-hidden border-none block m-0 p-0 rounded-inherit w-24px h-24px shadow-inset shadow-border-base shadow-checkbox-base disabled:(bg-disabled) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) checked:(shadow-checkbox-active shadow-border-active) enabled-not-checked-hover:(shadow-checkbox-hover shadow-border-active) not-checked:transition-shadow focus-visible:(outline outline-border-active outline-2)',
       'sui-checkbox-svg': 'block absolute left-0 top-0 fill-white pointer-events-none scale-101 translate-z-0',
       'sui-checkbox-check': 'fill-none stroke-2 stroke-white origin-[10.5px_16px] scale-100 translate-z-0',
       'sui-checkbox-dot': 'origin-[10.5px_15.5px] translate-x-14px translate-y--14px translate-z-0 scale-100 ',
@@ -145,7 +173,7 @@ export default defineConfig({
     {
       'sui-switch-wrapper': 'rounded-12px relative cursor-pointer',
       'sui-switch':
-        'disabled:(bg-neutral-200! cursor-not-allowed) disabled-checked:(bg-primary-200!) cursor-pointer appearance-none outline-hidden border-none bg-neutral-200 block m-0 p-0 rounded-inherit w-38px h-24px checked:bg-primary-600 focus-visible:(outline-2 outline outline-border-active)',
+        'disabled:(bg-disabled! cursor-not-allowed) disabled-checked:(bg-primary-200!) cursor-pointer appearance-none outline-hidden border-none bg-neutral-200 block m-0 p-0 rounded-inherit w-38px h-24px checked:bg-primary-600 focus-visible:(outline-2 outline outline-border-active)',
       'sui-switch-svg':
         'block absolute left-0 top-0 pointer-events-none fill-white w-38px h-24px scale-101 translate-z-0',
     },
@@ -153,7 +181,7 @@ export default defineConfig({
     {
       'sui-radio-wrapper': 'rounded-12px relative',
       'sui-radio':
-        'disabled:(bg-neutral-200! cursor-not-allowed) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) appearance-none outline-hidden border-none bg-none block cursor-pointer m-0 p-0 rounded-inherit w-24px h-24px shadow-radio-base shadow-border-base checked:(shadow-border-active shadow-radio-active) not-checked:transition-shadow enabled-not-checked-hover:(shadow-border-active shadow-radio-hover)',
+        'disabled:(bg-disabled! cursor-not-allowed) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) appearance-none outline-hidden border-none bg-none block cursor-pointer m-0 p-0 rounded-inherit w-24px h-24px shadow-radio-base shadow-border-base checked:(shadow-border-active shadow-radio-active) not-checked:transition-shadow enabled-not-checked-hover:(shadow-border-active shadow-radio-hover)',
     },
     // toast
     {
@@ -187,4 +215,14 @@ export default defineConfig({
   ],
   // ...
   transformers: [transformerVariantGroup(), transformerDirectives()],
+  safelist: [
+    'bg-primary',
+    'bg-warn',
+    'bg-danger',
+    'bg-success',
+    'text-primary',
+    'text-danger',
+    'text-success',
+    'text-warn',
+  ],
 })

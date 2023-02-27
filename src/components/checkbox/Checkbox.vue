@@ -1,5 +1,5 @@
 <template>
-  <div ref="checkboxRef" class="sui-checkbox-wrapper">
+  <div ref="checkboxRef" class="sui-checkbox-wrapper inline-block">
     <input
       :disabled="p.disabled"
       :value="p.value"
@@ -59,10 +59,14 @@ const data = useVModel(p, 'modelValue', emit)
 async function animation() {
   if (!inputRef.value || !dotRef.value || !checkRef.value) return
 
-  if (data.value) {
+  if (inputRef.value.checked) {
     await timeline([
-      [inputRef.value, { boxShadow: ['inset 0 0 0 3px #d1d5db', 'inset 0 0 0 12px #7c3aed'] }, { duration: 0.2 }],
-      [checkboxRef.value!, { borderTopRightRadius: [null, '14px', '8px'] }, { duration: 0.4 }],
+      [
+        inputRef.value,
+        { boxShadow: ['inset 0 0 0 3px #d1d5db', 'inset 0 0 0 12px var(--un-shadow-color)'] },
+        { duration: 0.2 },
+      ],
+      [checkboxRef.value!, { borderTopRightRadius: [null, '14px', '8px'] }, { duration: 0.4, at: '-0.2' }],
       [
         checkRef.value!,
         {
