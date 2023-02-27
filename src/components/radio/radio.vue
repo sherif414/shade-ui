@@ -8,13 +8,13 @@
     >
       <circle
         ref="topRef"
-        class="top translate-z-0 translate-y-0 scale-x-175 scale-y-100 origin-[12px_-12px]"
+        class="translate-z-0 translate-y-0 scale-x-175 scale-y-100 origin-[12px_-12px]"
         cx="12"
         cy="-12"
         r="8"
       />
-      <circle ref="dotRef" class="dot translate-y--17px translate-z-0" cx="12" cy="12" r="5" />
-      <circle ref="dropRef" class="drop translate-y--14px translate-z-0" cx="12" cy="12" r="2" />
+      <circle ref="dotRef" class="translate-y--17px translate-z-0" cx="12" cy="12" r="5" />
+      <circle ref="dropRef" class="translate-y--14px translate-z-0" cx="12" cy="12" r="2" />
     </svg>
     <svg class="pointer-events-none hidden" width="0" height="0">
       <defs>
