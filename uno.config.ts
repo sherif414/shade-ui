@@ -16,6 +16,7 @@ export default defineConfig({
       success: '#339900',
       danger: '#ff0000',
       warn: '#ffaa00',
+      info: '#3b82f6',
       border: {
         base: '#d1d5db',
       },
@@ -130,6 +131,14 @@ export default defineConfig({
       'sui-radio':
         'disabled:(bg-disabled! cursor-not-allowed) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) appearance-none outline-hidden border-none bg-none block cursor-pointer m-0 p-0 rounded-inherit w-24px h-24px shadow-radio-base shadow-border-base checked:(shadow-primary shadow-radio-active) not-checked:transition-shadow enabled-not-checked-hover:(shadow-primary shadow-radio-hover)',
     },
+    // badge
+    {
+      'sui-badge': 'relative',
+      'sui-badge-dot':
+        'z-1 w-4 h-4 rounded-full absolute right--6px top--6px pointer-events-none border-2 border-solid border-white',
+      'sui-badge-value':
+        'min-w-4 h-4.5 center z-1 text-xs rounded-full text-on-primary px-1 absolute left-full translate-x--50% bottom-full translate-y-50% pointer-events-none border-2 border-solid border-white',
+    },
     // toast
     {
       'sui-toast-layout': 'fixed left-50% top-70px -translate-x-50% center flex-col gap-4 z-9999 pointer-events-none',
@@ -167,10 +176,12 @@ export default defineConfig({
     'bg-warn',
     'bg-danger',
     'bg-success',
+    'bg-info',
     'text-primary',
     'text-danger',
     'text-success',
     'text-warn',
+    'text-info',
   ],
 })
 

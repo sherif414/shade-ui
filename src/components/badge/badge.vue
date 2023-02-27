@@ -1,16 +1,8 @@
 <template>
-  <div class="sui-badge relative">
-    <div
-      v-if="p.dotOnly"
-      :class="colorClasses"
-      class="sui-badge-dot z-1 w-4 h-4 rounded-full bg-blue absolute right--6px top--6px pointer-events-none border-2 border-solid border-white"
-    ></div>
+  <div class="sui-badge">
+    <div v-if="p.dotOnly" :class="colorClasses" class="sui-badge-dot"></div>
     <template v-else>
-      <div
-        v-if="typeof p.value === 'number' && p.value !== 0"
-        :class="colorClasses"
-        class="sui-badge-value min-w-4 h-4.5 center z-1 text-xs rounded-full text-on-primary px-1 bg-blue absolute left-full translate-x--50% bottom-full translate-y-50% pointer-events-none border-2 border-solid border-white"
-      >
+      <div v-if="typeof p.value === 'number' && p.value !== 0" :class="colorClasses" class="sui-badge-value">
         {{ formatValue }}
       </div>
     </template>
