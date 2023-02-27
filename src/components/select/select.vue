@@ -1,7 +1,6 @@
 <script lang="ts" setup>
 import { onClickOutside, useFocus } from '@vueuse/core'
 import { computed, ref } from 'vue'
-import { Input } from '@/components/input'
 import { CheckCircleIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
 export type Option = {
   label: string
