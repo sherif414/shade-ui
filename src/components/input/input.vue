@@ -108,3 +108,12 @@ export default {
   inheritAttrs: false,
 }
 </script>
+<style>
+.sui-input::-webkit-outer-spin-button,
+.sui-input::-webkit-inner-spin-button,
+.sui-input {
+  -webkit-appearance: none;
+  -moz-appearance: textfield !important;
+  appearance: none;
+}
+</style>

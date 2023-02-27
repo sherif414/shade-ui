@@ -122,7 +122,7 @@ export default defineConfig({
     {
       'sui-input-wrapper': 'relative w-full row justify-start',
       'sui-input':
-        'text-on-surface grow bg-white border-none outline-neutral-200 rounded-8px w-full outline outline-1 disabled:(cursor-not-allowed! bg-disabled text-on-disabled outline-transparent) px-4 transition-colors focus:(outline-primary-600 outline-2)',
+        ' text-on-surface grow bg-white border-none outline-neutral-200 rounded-8px w-full outline outline-1 disabled:(cursor-not-allowed! bg-disabled text-on-disabled outline-transparent) px-4 transition-colors focus:(outline-primary-600 outline-2)',
       'sui-input-size-sm': 'h-9 text-xs',
       'sui-input-size-md': 'h-11 text-sm',
       'sui-input-size-lg': 'h-13 text-base',
