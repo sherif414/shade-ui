@@ -18,5 +18,10 @@ export default defineConfig({
     'text-success',
     'text-warn',
     'text-info',
+    'toast-danger',
+    'toast-info',
+    'toast-notification',
+    'toast-success',
+    'toast-warn',
   ],
 })

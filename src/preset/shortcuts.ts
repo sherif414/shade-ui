@@ -101,7 +101,7 @@ export const shortcuts = [
     'sui-toast-content': 'max-w-500px truncate',
     'toast-warn': 'bg-yellow bg-opacity-10 text-yellow shadow',
     'toast-success': 'bg-green bg-opacity-10 text-green shadow',
-    'toast-error': 'bg-red bg-opacity-10 text-red shadow',
+    'toast-danger': 'bg-red bg-opacity-10 text-red shadow',
     'toast-info': 'bg-blue bg-opacity-10 text-blue shadow',
     'toast-notification': 'bg-blue bg-opacity-10 text-blue shadow',
   },
