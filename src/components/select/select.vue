@@ -64,11 +64,11 @@ const labelSizeClasses = computed(() => ({
 
 <template>
   <div>
-    <div ref="selectRef" :data-disabled="p.disabled" :class="[selectSizeClasses, 'sui-select-wrapper']">
+    <div ref="selectRef" :data-sui-disabled="p.disabled" :class="[selectSizeClasses, 'sui-select-wrapper']">
       <div
         ref="triggerRef"
         :tabindex="disabled ? '-1' : '0'"
-        :data-disabled="p.disabled"
+        :data-sui-disabled="p.disabled"
         :class="[
           {
             'outline-red-400! text-red-400!': p.error && !p.disabled,
@@ -119,7 +119,7 @@ const labelSizeClasses = computed(() => ({
               class="sui-select-dropdown-item"
               :class="[p.modelValue?.label === option.label ? 'bg-neutral-100 text-primary-600' : '']"
               @click="handleSelect(option)"
-              :data-disabled="option.disabled"
+              :data-sui-disabled="option.disabled"
             >
               {{ option.label }}
               <CheckCircleIcon class="w-3 h-3" v-if="p.modelValue?.label === option.label" />
