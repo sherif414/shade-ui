@@ -16,7 +16,13 @@ export interface Props {
   size?: 'sm' | 'md' | 'lg'
   iconPrepend?: any
   iconAppend?: any
+  id?: string
 }
+
+defineOptions({
+  name: 'SInput',
+  inheritAttrs: false,
+})
 
 // props, emits, attrs
 const p = withDefaults(defineProps<Props>(), {
@@ -25,7 +31,6 @@ const p = withDefaults(defineProps<Props>(), {
 })
 
 const emit = defineEmits<{
-  // TODO: is this really needed?
   (event: 'click'): void
   (event: 'update:modelValue'): void
 }>()
@@ -76,7 +81,7 @@ const { focused: isFocused } = useFocus(inputEl)
         placeholder=" "
         @[eventType]="$emit('update:modelValue', ($event.target as HTMLInputElement)?.value)"
         :class="[{ 'outline-red-400!': p.error }, inputSizeClasses, 'sui-input peer']"
-        :id="inputId"
+        :id="p.id || inputId"
         :type="p.type"
         :disabled="p.disabled"
         :readonly="p.readonly"
@@ -88,7 +93,7 @@ const { focused: isFocused } = useFocus(inputEl)
       </div>
 
       <!-- label -->
-      <label :for="inputId" v-if="p.label" :class="[labelSizeClasses, 'sui-input-label']">{{ p.label }}</label>
+      <label :for="p.id || inputId" v-if="p.label" :class="[labelSizeClasses, 'sui-input-label']">{{ p.label }}</label>
 
       <!-- appended icon -->
       <div v-if="p.iconAppend" class="sui-input-icon right-0">
@@ -103,11 +108,6 @@ const { focused: isFocused } = useFocus(inputEl)
   </div>
 </template>
 
-<script lang="ts">
-export default {
-  inheritAttrs: false,
-}
-</script>
 <style>
 .sui-input::-webkit-outer-spin-button,
 .sui-input::-webkit-inner-spin-button,

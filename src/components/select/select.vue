@@ -1,7 +1,9 @@
 <script lang="ts" setup>
-import { onClickOutside, useFocus } from '@vueuse/core'
+import { useFocus } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { CheckCircleIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
+import { Floating } from '@/components/floating'
+
 export type Option = {
   label: string
   value: any
@@ -37,16 +39,7 @@ function handleSelect(option: Option): void {
 
 const isDropdownVisible = ref(false)
 const triggerRef = ref<HTMLElement | null>(null)
-const selectRef = ref<HTMLElement | null>(null)
 const { focused: isFocus } = useFocus(triggerRef)
-
-onClickOutside(selectRef, () => {
-  isDropdownVisible.value = false
-})
-function toggleDropdown() {
-  if (p.disabled) return
-  isDropdownVisible.value = !isDropdownVisible.value
-}
 
 // computed classes
 const selectSizeClasses = computed(() => {
@@ -67,7 +60,7 @@ const labelSizeClasses = computed(() => ({
     <div ref="selectRef" :data-sui-disabled="p.disabled" :class="[selectSizeClasses, 'sui-select-wrapper']">
       <div
         ref="triggerRef"
-        :tabindex="disabled ? '-1' : '0'"
+        :tabindex="p.disabled ? '-1' : '0'"
         :data-sui-disabled="p.disabled"
         :class="[
           {
@@ -75,14 +68,13 @@ const labelSizeClasses = computed(() => ({
           },
           'sui-select-trigger ',
         ]"
-        @click="toggleDropdown"
       >
         <!-- label -->
         <div
           :class="[
             labelSizeClasses,
             {
-              'floating-label!': modelValue?.label || isFocus,
+              'floating-label!': p.modelValue?.label || isFocus,
             },
             'sui-select-label',
           ]"
@@ -111,21 +103,23 @@ const labelSizeClasses = computed(() => ({
         enter-active-class="transition duration-300"
         leave-active-class="transition duration-300"
       >
-        <ul v-show="isDropdownVisible" class="sui-select-dropdown">
-          <slot :handleSelect="handleSelect">
-            <li
-              v-for="option in p.options"
-              :key="option.label"
-              class="sui-select-dropdown-item"
-              :class="[p.modelValue?.label === option.label ? 'bg-neutral-100 text-primary-600' : '']"
-              @click="handleSelect(option)"
-              :data-sui-disabled="option.disabled"
-            >
-              {{ option.label }}
-              <CheckCircleIcon class="w-3 h-3" v-if="p.modelValue?.label === option.label" />
-            </li>
-          </slot>
-        </ul>
+        <Floating v-model:visible="isDropdownVisible" :offset="8" :reference="triggerRef">
+          <ul class="sui-select-dropdown">
+            <slot :handleSelect="handleSelect">
+              <li
+                v-for="option in p.options"
+                :key="option.label"
+                class="sui-select-dropdown-item"
+                :class="[p.modelValue?.label === option.label ? 'bg-primary-100 text-primary-600' : '']"
+                @click="handleSelect(option)"
+                :data-sui-disabled="option.disabled"
+              >
+                {{ option.label }}
+                <CheckCircleIcon class="w-3 h-3" v-if="p.modelValue?.label === option.label" />
+              </li>
+            </slot>
+          </ul>
+        </Floating>
       </Transition>
     </div>
 

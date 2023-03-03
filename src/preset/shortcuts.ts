@@ -61,7 +61,7 @@ export const shortcuts = [
       ' list-none bg-white border flex flex-col shadow-dropdown rounded-8px w-full max-h-50 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
 
     'sui-select-dropdown-item':
-      'min-h-10 px-4 row cursor-pointer row justify-between gap-2 transition-all duration-300 ease-out sui-disabled:(text-on-disabled! cursor-default!) hover-sui-enabled:(bg-neutral-100 pl-5)',
+      'min-h-10 px-4 row cursor-pointer row justify-between gap-2 transition-all duration-300 ease-out sui-disabled:(text-on-disabled! cursor-default!) hover-sui-enabled:(bg-primary-100 pl-5)',
   },
   // checkbox
   {

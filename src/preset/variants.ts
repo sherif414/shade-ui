@@ -12,7 +12,7 @@ export const variants = [
     if (!matcher.startsWith('sui-enabled:')) return matcher
     return {
       matcher: matcher.slice(12),
-      selector: (s: string) => `${s}:enabled, ${s}:not:[data-sui-disabled="true"]`,
+      selector: (s: string) => `${s}:enabled, ${s}:not([data-sui-disabled="true"], :disabled)`,
     }
   },
 ]
