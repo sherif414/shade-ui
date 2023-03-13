@@ -30,7 +30,7 @@ export default defineConfig({
     {
       'sui-input-wrapper': 'inline-flex items-center text-on-surface bg-white relative w-full',
       'sui-input':
-        'grow min-w-0 text-on-surface bg-white border-none h-full outline-(solid 1 neutral-200) rounded focus-outline-(primary-600 2) transition-colors',
+        'disabled:(bg-neutral-100 outline-transparent! cursor-not-allowed!) grow min-w-0 text-on-surface bg-white border-none h-full outline-(solid 1 neutral-200) rounded focus-outline-(primary-600 2) transition-colors',
       'sui-input-size-sm': 'h-10 text-xs',
       'sui-input-size-md': 'h-11 text-sm',
       'sui-input-size-lg': 'h-12 text-base',
@@ -74,7 +74,7 @@ export default defineConfig({
     {
       'sui-radio-wrapper': 'rounded-12px relative',
       'sui-radio':
-        'disabled:(bg-disabled! cursor-not-allowed) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) appearance-none outline-hidden border-none bg-none block cursor-pointer m-0 p-0 rounded-inherit w-24px h-24px shadow-radio-base shadow-border-base checked:(shadow-primary shadow-radio-active) not-checked:transition-shadow enabled-not-checked-hover:(shadow-primary shadow-radio-hover)',
+        'disabled:(bg-disabled! cursor-not-allowed) disabled-checked:(shadow-checkbox-active! shadow-primary-200!) appearance-none outline-hidden border-none bg-none block cursor-pointer m-0 p-0 rounded-inherit w-24px h-24px shadow-radio-base shadow-border-base focus-visible:(outline outline-primary outline-2) checked:(shadow-primary shadow-radio-active) not-checked:transition-shadow enabled-not-checked-hover:(shadow-primary shadow-radio-hover)',
     },
     // badge
     {

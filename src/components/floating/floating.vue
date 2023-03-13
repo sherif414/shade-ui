@@ -19,7 +19,7 @@
 <script setup lang="ts">
 import { useFloating, size, shift, flip, autoUpdate, offset, type Placement } from '@floating-ui/vue'
 import { onClickOutside, useEventListener, useVModel } from '@vueuse/core'
-import { watch, onMounted, ref, toRef, type Ref } from 'vue'
+import { ref, toRef } from 'vue'
 
 const props = defineProps<{
   reference?: HTMLElement | null
@@ -29,7 +29,9 @@ const props = defineProps<{
   placement?: Placement
 }>()
 
-const emit = defineEmits(['update:visible'])
+const emit = defineEmits<{
+  (event: 'update:visible', value: boolean): void
+}>()
 const referenceEl = toRef(props, 'reference')
 const floatingEl = ref<HTMLElement | null>(null)
 const isFloatingElVisible = useVModel(props, 'visible', emit, { eventName: 'update:visible' })

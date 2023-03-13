@@ -1,6 +1,6 @@
 <script lang="ts" setup>
 import { useFocus } from '@vueuse/core'
-import { computed, ref } from 'vue'
+import { ref } from 'vue'
 import { CheckCircleIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { Floating } from '@/components/floating'
 import { Input } from '@/components/input'
@@ -37,9 +37,13 @@ function handleSelect(option: Option): void {
   isDropdownVisible.value = false
 }
 
+function handleUpdateVisibility(value: boolean) {
+  if (p.disabled || p.readonly) return
+  isDropdownVisible.value = value
+}
+
 const isDropdownVisible = ref(false)
 const inputRef = ref<InstanceType<typeof Input> | null>(null)
-const { focused: isFocus } = useFocus(inputRef.value?.inputEl)
 </script>
 
 <template>
@@ -54,7 +58,7 @@ const { focused: isFocus } = useFocus(inputRef.value?.inputEl)
     :hint="p.hint"
     :size="p.size"
     :model-value="p.modelValue?.label"
-    input-class="cursor-pointer!"
+    input-class="cursor-pointer"
   >
     <template v-if="$slots.icon" #iconPrepend>
       <slot name="icon"></slot>
@@ -71,7 +75,12 @@ const { focused: isFocus } = useFocus(inputRef.value?.inputEl)
     enter-active-class="transition duration-300"
     leave-active-class="transition duration-300"
   >
-    <Floating v-model:visible="isDropdownVisible" :offset="8" :reference="inputRef?.inputWrapperEl">
+    <Floating
+      @update:visible="handleUpdateVisibility"
+      :visible="isDropdownVisible"
+      :offset="8"
+      :reference="inputRef?.inputWrapperEl"
+    >
       <ul class="sui-select-dropdown">
         <slot :handleSelect="handleSelect">
           <li

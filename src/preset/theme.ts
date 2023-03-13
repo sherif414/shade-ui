@@ -1,6 +1,6 @@
 export const theme = {
   borderRadius: {
-    DEFAULT: '8px',
+    DEFAULT: '16px',
   },
   boxShadow: {
     dropdown: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
