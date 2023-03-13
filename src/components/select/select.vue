@@ -3,6 +3,7 @@ import { useFocus } from '@vueuse/core'
 import { computed, ref } from 'vue'
 import { CheckCircleIcon, ChevronDownIcon } from '@heroicons/vue/20/solid'
 import { Floating } from '@/components/floating'
+import { Input } from '@/components/input'
 
 export type Option = {
   label: string
@@ -20,7 +21,6 @@ export interface Props {
   hint?: string
   size?: 'sm' | 'md' | 'lg'
   options?: Option[]
-  icon?: any
 }
 
 const p = withDefaults(defineProps<Props>(), {
@@ -38,97 +38,55 @@ function handleSelect(option: Option): void {
 }
 
 const isDropdownVisible = ref(false)
-const triggerRef = ref<HTMLElement | null>(null)
-const { focused: isFocus } = useFocus(triggerRef)
-
-// computed classes
-const selectSizeClasses = computed(() => {
-  if (p.size === 'sm') return 'sui-select-size-sm'
-  if (p.size === 'md') return 'sui-select-size-md'
-  if (p.size === 'lg') return 'sui-select-size-lg'
-})
-
-const labelSizeClasses = computed(() => ({
-  'left-8': p.size === 'sm' && p.icon,
-  'left-10': p.size === 'md' && p.icon,
-  'left-12': p.size === 'lg' && p.icon,
-}))
+const inputRef = ref<InstanceType<typeof Input> | null>(null)
+const { focused: isFocus } = useFocus(inputRef.value?.inputEl)
 </script>
 
 <template>
-  <div>
-    <div ref="selectRef" :data-sui-disabled="p.disabled" :class="[selectSizeClasses, 'sui-select-wrapper']">
-      <div
-        ref="triggerRef"
-        :tabindex="p.disabled ? '-1' : '0'"
-        :data-sui-disabled="p.disabled"
-        :class="[
-          {
-            'outline-red-400! text-red-400!': p.error && !p.disabled,
-          },
-          'sui-select-trigger ',
-        ]"
-      >
-        <!-- label -->
-        <div
-          :class="[
-            labelSizeClasses,
-            {
-              'floating-label!': p.modelValue?.label || isFocus,
-            },
-            'sui-select-label',
-          ]"
-        >
-          {{ p.label }}
-        </div>
+  <Input
+    ref="inputRef"
+    v-bind="$attrs"
+    :readonly="true"
+    :error="p.error"
+    :error-message="p.errorMessage"
+    :disabled="p.disabled"
+    :label="p.label"
+    :hint="p.hint"
+    :size="p.size"
+    :model-value="p.modelValue?.label"
+    input-class="cursor-pointer!"
+  >
+    <template v-if="$slots.icon" #iconPrepend>
+      <slot name="icon"></slot>
+    </template>
+    <template #iconAppend>
+      <ChevronDownIcon :class="[{ 'rotate-180': isDropdownVisible }, 'w-4 h-4 transition-transform']" />
+    </template>
+  </Input>
 
-        <!-- prepended icon -->
-        <div class="sui-select-icon left-0" v-if="p.icon">
-          <Component :is="p.icon" />
-        </div>
-
-        <!-- value -->
-        <div :class="[p.disabled ? 'text-on-disabled' : 'text-on-surface', 'grow']">{{ p.modelValue?.label }}</div>
-
-        <!-- appended icon -->
-        <div class="sui-select-icon right-0">
-          <ChevronDownIcon :class="[{ 'rotate-180': isDropdownVisible }, 'transition-transform']" />
-        </div>
-      </div>
-
-      <!-- dropdown -->
-      <Transition
-        enter-from-class="translate-y--3 opacity-0"
-        leave-to-class="translate-y--3 opacity-0"
-        enter-active-class="transition duration-300"
-        leave-active-class="transition duration-300"
-      >
-        <Floating v-model:visible="isDropdownVisible" :offset="8" :reference="triggerRef">
-          <ul class="sui-select-dropdown">
-            <slot :handleSelect="handleSelect">
-              <li
-                v-for="option in p.options"
-                :key="option.label"
-                class="sui-select-dropdown-item"
-                :class="[p.modelValue?.label === option.label ? 'bg-primary-100 text-primary-600' : '']"
-                @click="handleSelect(option)"
-                :data-sui-disabled="option.disabled"
-              >
-                {{ option.label }}
-                <CheckCircleIcon class="w-3 h-3" v-if="p.modelValue?.label === option.label" />
-              </li>
-            </slot>
-          </ul>
-        </Floating>
-      </Transition>
-    </div>
-
-    <!-- hint & error -->
-    <small
-      v-if="p.error || p.hint"
-      :class="[p.error ? 'text-red-400' : 'text-on-surface-muted', p.disabled && 'text-on-disabled!', 'text-xs pl-2']"
-    >
-      {{ p.error ? p.errorMessage || p.hint : p.hint }}
-    </small>
-  </div>
+  <!-- dropdown -->
+  <Transition
+    enter-from-class="translate-y--3 opacity-0"
+    leave-to-class="translate-y--3 opacity-0"
+    enter-active-class="transition duration-300"
+    leave-active-class="transition duration-300"
+  >
+    <Floating v-model:visible="isDropdownVisible" :offset="8" :reference="inputRef?.inputWrapperEl">
+      <ul class="sui-select-dropdown">
+        <slot :handleSelect="handleSelect">
+          <li
+            v-for="option in p.options"
+            :key="option.label"
+            class="sui-select-dropdown-item"
+            :class="[p.modelValue?.label === option.label && 'bg-neutral-100 text-primary-600']"
+            @click="handleSelect(option)"
+            :data-sui-disabled="option.disabled"
+          >
+            {{ option.label }}
+            <CheckCircleIcon class="w-3 h-3" v-if="p.modelValue?.label === option.label" />
+          </li>
+        </slot>
+      </ul>
+    </Floating>
+  </Transition>
 </template>

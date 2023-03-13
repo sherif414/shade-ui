@@ -1,4 +1,7 @@
 export const theme = {
+  borderRadius: {
+    DEFAULT: '8px',
+  },
   boxShadow: {
     dropdown: 'rgba(0, 0, 0, 0.16) 0px 1px 4px',
     'checkbox-base': 'inset 0px 0px 0px 2px var(--un-shadow-color)',

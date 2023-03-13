@@ -2,7 +2,7 @@
   <div class="sui-badge">
     <div v-if="p.dotOnly" :class="colorClasses" class="sui-badge-dot"></div>
     <template v-else>
-      <div v-if="typeof p.value === 'number' && p.value !== 0" :class="colorClasses" class="sui-badge-value">
+      <div v-show="p.value" :class="colorClasses" class="sui-badge-value">
         {{ formatValue }}
       </div>
     </template>

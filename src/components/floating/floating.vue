@@ -22,7 +22,7 @@ import { onClickOutside, useEventListener, useVModel } from '@vueuse/core'
 import { watch, onMounted, ref, toRef, type Ref } from 'vue'
 
 const props = defineProps<{
-  reference: HTMLElement | null
+  reference?: HTMLElement | null
   visible?: boolean
   offset?: number
   transition?: string

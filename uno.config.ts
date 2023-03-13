@@ -14,59 +14,44 @@ export default defineConfig({
     // button
     {
       'sui-button':
-        'center border-none cursor-pointer outline outline-transparent rounded-8px leading-none transition-all whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-600 outline-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
+        'center border-none cursor-pointer outline outline-transparent rounded leading-none transition-all whitespace-nowrap capitalize active-enabled:scale-95 focus-visible:(outline-primary-600 outline-2) disabled:(cursor-not-allowed bg-disabled! text-on-disabled!)',
 
       'sui-button-v-filled': 'hover:bg-primary-800 bg-primary-600  text-on-primary focus-visible:outline-offset-2',
       'sui-button-v-text': 'hover:bg-neutral-100 bg-transparent',
       'sui-button-v-outline':
         'hover:(bg-light-600 outline-transparent) bg-transparent outline-1 outline-neutral-200 disabled:outline-transparent',
 
-      'sui-button-size-sm': 'px-8 h-8 text-xs gap-2',
-      'sui-button-size-md': 'px-10 h-10 text-sm gap-2',
-      'sui-button-size-lg': 'px-12 h-12 text-base gap-4',
-      'sui-button-icon-only': 'h-10 px-3 text-sm',
+      'sui-button-size-sm': 'px-4 h-10 text-xs gap-2',
+      'sui-button-size-md': 'px-5 h-11 text-sm gap-2',
+      'sui-button-size-lg': 'px-6 h-12 text-base gap-4',
+      'sui-button-icon-only': 'p-3 text-sm',
     },
     // input
     {
-      'sui-input-wrapper': 'relative w-full row justify-start',
+      'sui-input-wrapper': 'inline-flex items-center text-on-surface bg-white relative w-full',
       'sui-input':
-        ' text-on-surface grow bg-white border-none outline-neutral-200 rounded-8px w-full outline outline-1 disabled:(cursor-not-allowed! bg-disabled text-on-disabled outline-transparent) px-4 transition-colors focus:(outline-primary-600 outline-2)',
-      'sui-input-size-sm': 'h-9 text-xs',
+        'grow min-w-0 text-on-surface bg-white border-none h-full outline-(solid 1 neutral-200) rounded focus-outline-(primary-600 2) transition-colors',
+      'sui-input-size-sm': 'h-10 text-xs',
       'sui-input-size-md': 'h-11 text-sm',
-      'sui-input-size-lg': 'h-13 text-base',
-      'sui-input-icon': 'absolute top-50% translate-y--50% aspect-square h-full center pointer-events-none',
-      'sui-input-label':
-        'w-max left-3 px-1 top-50% translate-y--50% transition-all duration-200 ease-out pointer-events-none absolute peer-not-placeholder-shown:floating-label peer-focus:floating-label peer-disabled:text-on-disabled',
+      'sui-input-size-lg': 'h-12 text-base',
+      'sui-input-icon': 'aspect-square h-full center gap-2 absolute top-0 pointer-events-none',
+      'sui-input-label': 'text-sm',
     },
     // textarea
     {
       'sui-textarea-wrapper': 'relative w-full',
       'sui-textarea':
-        ' px-4 py-2 text-on-surface bg-white border-none outline-neutral-200 rounded-8px w-full outline outline-1 disabled:(cursor-not-allowed! bg-disabled text-on-disabled outline-transparent) transition-colors focus:(outline-primary-600 outline-2)',
+        ' px-4 py-2 text-on-surface bg-white border-none outline-neutral-200 rounded w-full outline outline-1 disabled:(cursor-not-allowed! bg-disabled text-on-disabled outline-transparent) transition-colors focus:(outline-primary-600 outline-2)',
       'sui-textarea-label':
         'px-1 m-0 text-sm text-on-surface-muted w-max top-2 left-2 transition-all duration-200 ease-out pointer-events-none absolute',
     },
     // select
     {
-      'sui-select-wrapper': 'relative w-full sui-disabled:cursor-not-allowed',
-
-      'sui-select-trigger':
-        'text-on-surface-muted gap-4 relative row border-none outline rounded-8px w-full outline-neutral-200 outline-1 px-4 transition-colors cursor-pointer  sui-disabled:(bg-disabled! text-on-disabled! outline-transparent! pointer-events-none) focus:(outline-primary-600 outline-2 text-primary-600)',
-
-      'sui-select-size-sm': '[&_.sui-select-trigger]:h-9 text-xs [&_.sui-select-icon_>_*]:(w-3 h-3)',
-      'sui-select-size-md': '[&_.sui-select-trigger]:h-11 text-sm [&_.sui-select-icon_>_*]:(w-4 h-4)',
-      'sui-select-size-lg': '[&_.sui-select-trigger]:h-13 text-base [&_.sui-select-icon_>_*]:(w-5 h-5)',
-
-      'sui-select-icon': 'aspect-square center',
-
-      'sui-select-label':
-        'w-max left-3 px-1 top-50% translate-y--50% transition-all duration-200 pointer-events-none absolute',
-
       'sui-select-dropdown':
-        ' list-none bg-white border flex flex-col shadow-dropdown rounded-8px w-full max-h-50 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
+        ' list-none bg-white border flex flex-col shadow-dropdown rounded-8px text-sm w-full max-h-50 top-115% left-0 z-1 absolute overflow-y-auto p-0 m-0',
 
       'sui-select-dropdown-item':
-        'min-h-10 px-4 row cursor-pointer row justify-between gap-2 transition-all duration-300 ease-out sui-disabled:(text-on-disabled! cursor-default!) hover-sui-enabled:(bg-primary-50 pl-5)',
+        'min-h-10 px-4 row cursor-pointer row justify-between gap-2 transition-all sui-disabled:(text-on-disabled! cursor-default!) hover-sui-enabled:(bg-neutral-100 pl-5)',
     },
     // checkbox
     {
